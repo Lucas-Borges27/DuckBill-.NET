@@ -1,0 +1,39 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuckBill.Domain", "src/DuckBill.Domain/DuckBill.Domain.csproj", "{5A0A0B51-0D8F-4CFE-9A86-111111111111}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuckBill.Application", "src/DuckBill.Application/DuckBill.Application.csproj", "{5A0A0B51-0D8F-4CFE-9A86-222222222222}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuckBill.Infrastructure", "src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj", "{5A0A0B51-0D8F-4CFE-9A86-333333333333}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuckBill.Api", "src/DuckBill.Api/DuckBill.Api.csproj", "{5A0A0B51-0D8F-4CFE-9A86-444444444444}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A0A0B51-0D8F-4CFE-9A86-111111111111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A0A0B51-0D8F-4CFE-9A86-111111111111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A0A0B51-0D8F-4CFE-9A86-111111111111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0A0B51-0D8F-4CFE-9A86-111111111111}.Release|Any CPU.Build.0 = Release|Any CPU
+
+		{5A0A0B51-0D8F-4CFE-9A86-222222222222}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A0A0B51-0D8F-4CFE-9A86-222222222222}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A0A0B51-0D8F-4CFE-9A86-222222222222}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0A0B51-0D8F-4CFE-9A86-222222222222}.Release|Any CPU.Build.0 = Release|Any CPU
+
+		{5A0A0B51-0D8F-4CFE-9A86-333333333333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A0A0B51-0D8F-4CFE-9A86-333333333333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A0A0B51-0D8F-4CFE-9A86-333333333333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0A0B51-0D8F-4CFE-9A86-333333333333}.Release|Any CPU.Build.0 = Release|Any CPU
+
+		{5A0A0B51-0D8F-4CFE-9A86-444444444444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A0A0B51-0D8F-4CFE-9A86-444444444444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A0A0B51-0D8F-4CFE-9A86-444444444444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0A0B51-0D8F-4CFE-9A86-444444444444}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

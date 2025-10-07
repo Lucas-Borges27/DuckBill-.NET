@@ -1,0 +1,140 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj": {}
+  },
+  "projects": {
+    "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Domain/DuckBill.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Domain/DuckBill.Domain.csproj",
+        "projectName": "DuckBill.Domain",
+        "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Domain/DuckBill.Domain.csproj",
+        "packagesPath": "/Users/lucasborges/.nuget/packages/",
+        "outputPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/lucasborges/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj",
+        "projectName": "DuckBill.Infrastructure",
+        "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj",
+        "packagesPath": "/Users/lucasborges/.nuget/packages/",
+        "outputPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/lucasborges/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Domain/DuckBill.Domain.csproj": {
+                "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Domain/DuckBill.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Oracle.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.21.50, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

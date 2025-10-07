@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "dgSpecHash": "Mt20ksLe5Mg=",
+  "success": true,
+  "projectFilePath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "/Users/lucasborges/.nuget/packages/microsoft.entityframeworkcore/8.0.0/microsoft.entityframeworkcore.8.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.0/microsoft.entityframeworkcore.abstractions.8.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/microsoft.entityframeworkcore.analyzers/8.0.0/microsoft.entityframeworkcore.analyzers.8.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/microsoft.entityframeworkcore.relational/8.0.0/microsoft.entityframeworkcore.relational.8.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/microsoft.extensions.caching.abstractions/8.0.0/microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/microsoft.extensions.caching.memory/8.0.0/microsoft.extensions.caching.memory.8.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/microsoft.extensions.dependencyinjection/8.0.0/microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/microsoft.extensions.logging/8.0.0/microsoft.extensions.logging.8.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.0/microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/microsoft.extensions.options/8.0.0/microsoft.extensions.options.8.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/microsoft.extensions.primitives/8.0.0/microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/microsoft.win32.systemevents/6.0.0/microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/oracle.entityframeworkcore/8.21.121/oracle.entityframeworkcore.8.21.121.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/oracle.manageddataaccess.core/3.21.120/oracle.manageddataaccess.core.3.21.120.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/system.configuration.configurationmanager/6.0.0/system.configuration.configurationmanager.6.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/system.diagnostics.performancecounter/6.0.1/system.diagnostics.performancecounter.6.0.1.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/system.directoryservices/6.0.1/system.directoryservices.6.0.1.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/system.directoryservices.protocols/6.0.2/system.directoryservices.protocols.6.0.2.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/system.drawing.common/6.0.0/system.drawing.common.6.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/system.security.accesscontrol/6.0.0/system.security.accesscontrol.6.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/system.security.cryptography.protecteddata/6.0.0/system.security.cryptography.protecteddata.6.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/system.security.permissions/6.0.0/system.security.permissions.6.0.0.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "message": "DuckBill.Infrastructure depends on Oracle.EntityFrameworkCore (>= 8.21.50) but Oracle.EntityFrameworkCore 8.21.50 was not found. Oracle.EntityFrameworkCore 8.21.121 was resolved instead.",
+      "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj",
+      "warningLevel": 1,
+      "filePath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj",
+      "libraryId": "Oracle.EntityFrameworkCore",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
+}

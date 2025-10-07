@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\DuckBill.Domain\DuckBill.Domain.csproj" />
+    <ProjectReference Include="..\DuckBill.Infrastructure\DuckBill.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>
