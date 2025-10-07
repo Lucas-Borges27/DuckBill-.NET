@@ -1,5 +1,10 @@
 # DuckBill .NET (ASP.NET Core 8 + EF Core)
 
+## Integrantes
+- Bruno Carlos Soares RM 559250 
+- Lucas Borges de Souza RM 560027 
+- Pedro Henrique Rodrigues RM 560393
+
 ## Definição do Projeto
 
 ### Objetivo do Projeto
