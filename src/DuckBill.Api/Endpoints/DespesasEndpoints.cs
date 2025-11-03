@@ -32,6 +32,14 @@ public static class DespesasEndpoints
             return result is null ? Results.NotFound() : Results.Ok(result);
         });
 
+        grp.MapGet("search", async (DespesaService service, long? usuarioId, string? filter, string? sort, int page = 1, int size = 10) =>
+        {
+            if (page < 1) return Results.BadRequest("Page must be greater than 0.");
+            if (size < 1 || size > 100) return Results.BadRequest("Size must be between 1 and 100.");
+            var result = await service.SearchAsync(usuarioId, filter, sort, page, size);
+            return Results.Ok(result);
+        });
+
         grp.MapGet("", async (long usuarioId, int? mes, int? ano, DespesaService service) =>
         {
             IEnumerable<DespesaDto> list;

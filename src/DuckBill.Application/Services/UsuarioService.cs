@@ -13,10 +13,62 @@ public class UsuarioService
         _usuarioRepository = usuarioRepository;
     }
 
+    public async Task<PaginatedResponse<UsuarioDto>> SearchAsync(string? filter, string? sort, int page = 1, int size = 10, CancellationToken ct = default)
+    {
+        if (page < 1) page = 1;
+        if (size < 1 || size > 100) size = 10;
+
+        var query = await _usuarioRepository.GetAllAsync(ct);
+        var filtered = query.AsQueryable();
+
+        // Filter
+        if (!string.IsNullOrWhiteSpace(filter))
+        {
+            filtered = filtered.Where(u => u.Nome.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
+                                           u.Email.Contains(filter, StringComparison.OrdinalIgnoreCase));
+        }
+
+        // Sort
+        if (!string.IsNullOrWhiteSpace(sort))
+        {
+            var sortParts = sort.Split(',');
+            var sortBy = sortParts[0].Trim();
+            var sortDir = sortParts.Length > 1 ? sortParts[1].Trim().ToLower() : "asc";
+
+            filtered = sortBy.ToLower() switch
+            {
+                "nome" => sortDir == "desc" ? filtered.OrderByDescending(u => u.Nome) : filtered.OrderBy(u => u.Nome),
+                "email" => sortDir == "desc" ? filtered.OrderByDescending(u => u.Email) : filtered.OrderBy(u => u.Email),
+                _ => filtered.OrderBy(u => u.Id)
+            };
+        }
+        else
+        {
+            filtered = filtered.OrderBy(u => u.Id);
+        }
+
+        var totalItems = filtered.Count();
+        var totalPages = (int)Math.Ceiling((double)totalItems / size);
+        var items = filtered.Skip((page - 1) * size).Take(size).ToList();
+
+        var dtos = items.Select(u => new UsuarioDto(u.Id, u.Nome, u.Email)).ToList();
+
+        var links = new Dictionary<string, string>
+        {
+            ["self"] = $"/api/usuarios/search?filter={filter}&sort={sort}&page={page}&size={size}"
+        };
+        if (page > 1) links["prev"] = $"/api/usuarios/search?filter={filter}&sort={sort}&page={page - 1}&size={size}";
+        if (page < totalPages) links["next"] = $"/api/usuarios/search?filter={filter}&sort={sort}&page={page + 1}&size={size}";
+        links["first"] = $"/api/usuarios/search?filter={filter}&sort={sort}&page=1&size={size}";
+        links["last"] = $"/api/usuarios/search?filter={filter}&sort={sort}&page={totalPages}&size={size}";
+
+        return new PaginatedResponse<UsuarioDto>(dtos, page, size, totalPages, totalItems, links);
+    }
+
     public async Task<UsuarioDto?> GetByIdAsync(long id, CancellationToken ct = default)
     {
         var usuario = await _usuarioRepository.GetByIdAsync(id, ct);
-        return usuario == null ? null : new UsuarioDto(usuario.Id, usuario.Nome, usuario.Email);
+        return usuario == null ? null : new UsuarioDto(usuario.Id, usuario.Nome, usuario.Email, new Dictionary<string, string> { ["self"] = $"/api/usuarios/{id}" });
     }
 
     public async Task<UsuarioDto?> GetByEmailAsync(string email, CancellationToken ct = default)

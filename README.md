@@ -7,8 +7,11 @@
 
 ## Definição do Projeto
 
+### Visão Geral do Projeto
+DuckBill .NET é uma aplicação de gerenciamento financeiro pessoal desenvolvida em ASP.NET Core 8 com Entity Framework Core, utilizando banco de dados Oracle. O sistema permite o controle completo de usuários, categorias de despesas, despesas, ativos financeiros e transações de ativos. Inclui integração com API externa para conversão de moedas em tempo real, relatórios financeiros e uma API REST completa com documentação Swagger.
+
 ### Objetivo do Projeto
-Este projeto tem como objetivo desenvolver uma aplicação para gerenciamento financeiro pessoal, permitindo o controle de usuários, categorias de despesas e despesas associadas, integrando com banco de dados Oracle para persistência dos dados.
+Este projeto tem como objetivo desenvolver uma aplicação para gerenciamento financeiro pessoal, permitindo o controle de usuários, categorias de despesas e despesas associadas, integrando com banco de dados Oracle para persistência dos dados. Inclui funcionalidades avançadas como busca paginada, ordenação, filtros e links HATEOAS para navegação.
 
 ### Escopo
 O sistema permitirá:
@@ -21,6 +24,8 @@ O sistema permitirá:
 - Relatórios financeiros (top 3 gastos do mês).
 - Exposição de API REST completa para integração com clientes externos.
 - Documentação da API via Swagger.
+- Busca avançada com paginação, ordenação e filtros para todos os domínios.
+- Links HATEOAS para navegação entre recursos.
 
 ### Requisitos Funcionais
 - CRUD completo para usuários, categorias, despesas, ativos e transações de ativos.
@@ -65,14 +70,51 @@ O projeto segue os princípios da Clean Architecture para garantir a separação
   - Gerencia migrações de banco de dados.
   - Implementa integrações externas (AwesomeAPI para conversão de moedas).
 
-## Rodando
+## Instruções de Instalação e Configuração
+
+### Pré-requisitos
+- .NET 8 SDK
+- Oracle Database (ou Docker com Oracle XE)
+- Git
+
+### Instalação
+1. Clone o repositório:
+```bash
+git clone <repository-url>
+cd DuckBill-.NET
+```
+
+2. Restaure as dependências:
 ```bash
 cd src/DuckBill.Api
 dotnet restore
-dotnet run
-# Swagger: http://localhost:5000/swagger
 ```
-Banco: Oracle.
+
+3. Configure a string de conexão do banco de dados no arquivo `appsettings.json`:
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "User Id=your_user;Password=your_password;Data Source=your_oracle_datasource;"
+  }
+}
+```
+
+4. Execute as migrações do banco de dados:
+```bash
+dotnet tool install --global dotnet-ef
+dotnet ef database update --project ../DuckBill.Infrastructure --startup-project .
+```
+
+5. Execute a aplicação:
+```bash
+dotnet run
+```
+
+6. Acesse a documentação da API via Swagger em: http://localhost:5000/swagger
+
+### Banco de Dados
+- Utiliza Oracle Database para persistência.
+- Migrações gerenciadas via Entity Framework Core.
 
 ## Migrações
 ```bash
@@ -86,6 +128,7 @@ dotnet ef database update --project ../DuckBill.Infrastructure --startup-project
 
 ### Usuários
 - `GET /api/usuarios` - Lista todos os usuários
+- `GET /api/usuarios/search?filter={f}&sort={s}&page={p}&size={sz}` - Busca paginada com filtros e ordenação (HATEOAS)
 - `GET /api/usuarios/{id}` - Busca usuário por ID
 - `POST /api/usuarios` - Cria novo usuário
 - `PUT /api/usuarios/{id}` - Atualiza usuário
@@ -93,6 +136,7 @@ dotnet ef database update --project ../DuckBill.Infrastructure --startup-project
 
 ### Categorias
 - `GET /api/categorias` - Lista todas as categorias
+- `GET /api/categorias/search?filter={f}&sort={s}&page={p}&size={sz}` - Busca paginada com filtros e ordenação (HATEOAS)
 - `GET /api/categorias/{id}` - Busca categoria por ID
 - `POST /api/categorias` - Cria nova categoria
 - `PUT /api/categorias/{id}` - Atualiza categoria
@@ -100,6 +144,7 @@ dotnet ef database update --project ../DuckBill.Infrastructure --startup-project
 
 ### Despesas
 - `GET /api/despesas` - Lista todas as despesas
+- `GET /api/despesas/search?usuarioId={uid}&filter={f}&sort={s}&page={p}&size={sz}` - Busca paginada com filtros e ordenação (HATEOAS)
 - `GET /api/despesas/{id}` - Busca despesa por ID
 - `POST /api/despesas` - Cria nova despesa
 - `PUT /api/despesas/{id}` - Atualiza despesa
@@ -107,6 +152,7 @@ dotnet ef database update --project ../DuckBill.Infrastructure --startup-project
 
 ### Ativos
 - `GET /api/ativos` - Lista todos os ativos
+- `GET /api/ativos/search?filter={f}&sort={s}&page={p}&size={sz}` - Busca paginada com filtros e ordenação (HATEOAS)
 - `GET /api/ativos/{id}` - Busca ativo por ID
 - `POST /api/ativos` - Cria novo ativo
 - `PUT /api/ativos/{id}` - Atualiza ativo
@@ -114,6 +160,7 @@ dotnet ef database update --project ../DuckBill.Infrastructure --startup-project
 
 ### Transações de Ativos
 - `GET /api/transacoes-ativo` - Lista todas as transações
+- `GET /api/transacoes-ativo/search?usuarioId={uid}&filter={f}&sort={s}&page={p}&size={sz}` - Busca paginada com filtros e ordenação (HATEOAS)
 - `GET /api/transacoes-ativo/{id}` - Busca transação por ID
 - `POST /api/transacoes-ativo` - Cria nova transação
 - `PUT /api/transacoes-ativo/{id}` - Atualiza transação
@@ -154,6 +201,11 @@ curl -X POST http://localhost:5000/api/usuarios \
 #### GET - Conversão de Moedas
 ```bash
 curl "http://localhost:5000/api/relatorios/cambio?from=USD&to=BRL&valor=100"
+```
+
+#### GET - Busca Paginada de Usuários
+```bash
+curl "http://localhost:5000/api/usuarios/search?filter=João&sort=nome,desc&page=1&size=10"
 ```
 
 #### PUT - Atualizar Categoria

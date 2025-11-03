@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DuckBill.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+16e046f6a1691a1c13390087e0dc443313686600")]
 [assembly: System.Reflection.AssemblyProductAttribute("DuckBill.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DuckBill.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

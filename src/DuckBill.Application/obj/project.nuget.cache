@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yJcxE6vC7u8=",
+  "dgSpecHash": "dMHV0zTysA0=",
   "success": true,
-  "projectFilePath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Application/DuckBill.Application.csproj",
+  "projectFilePath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint2/DuckBill-.NET/src/DuckBill.Application/DuckBill.Application.csproj",
   "expectedPackageFiles": [
     "/Users/lucasborges/.nuget/packages/microsoft.entityframeworkcore/8.0.0/microsoft.entityframeworkcore.8.0.0.nupkg.sha512",
     "/Users/lucasborges/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.0/microsoft.entityframeworkcore.abstractions.8.0.0.nupkg.sha512",
@@ -35,9 +35,9 @@
       "code": "NU1603",
       "level": "Warning",
       "message": "DuckBill.Infrastructure depends on Oracle.EntityFrameworkCore (>= 8.21.50) but Oracle.EntityFrameworkCore 8.21.50 was not found. Oracle.EntityFrameworkCore 8.21.121 was resolved instead.",
-      "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Application/DuckBill.Application.csproj",
+      "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint2/DuckBill-.NET/src/DuckBill.Application/DuckBill.Application.csproj",
       "warningLevel": 1,
-      "filePath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint1/FinancasJovens-DuckBill-FULL/src/DuckBill.Application/DuckBill.Application.csproj",
+      "filePath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint2/DuckBill-.NET/src/DuckBill.Application/DuckBill.Application.csproj",
       "libraryId": "Oracle.EntityFrameworkCore",
       "targetGraphs": [
         "net8.0"

@@ -26,6 +26,14 @@ public static class UsuariosEndpoints
             }
         });
 
+        grp.MapGet("search", async (UsuarioService service, string? filter, string? sort, int page = 1, int size = 10) =>
+        {
+            if (page < 1) return Results.BadRequest("Page must be greater than 0.");
+            if (size < 1 || size > 100) return Results.BadRequest("Size must be between 1 and 100.");
+            var result = await service.SearchAsync(filter, sort, page, size);
+            return Results.Ok(result);
+        });
+
         grp.MapGet("", async (UsuarioService service) =>
             await service.GetAllAsync());
 

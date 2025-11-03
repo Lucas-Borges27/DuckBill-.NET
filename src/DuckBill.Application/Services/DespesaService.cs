@@ -17,12 +17,70 @@ public class DespesaService
         _categoriaRepository = categoriaRepository;
     }
 
+    public async Task<PaginatedResponse<DespesaDto>> SearchAsync(long? usuarioId, string? filter, string? sort, int page = 1, int size = 10, CancellationToken ct = default)
+    {
+        if (page < 1) page = 1;
+        if (size < 1 || size > 100) size = 10;
+
+        var query = usuarioId.HasValue ? await _despesaRepository.GetByUsuarioIdAsync(usuarioId.Value, ct) : new List<Despesa>();
+        var filtered = query.AsQueryable();
+
+        // Filter
+        if (!string.IsNullOrWhiteSpace(filter))
+        {
+            filtered = filtered.Where(d => d.Descricao != null && d.Descricao.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
+                                           d.Moeda.Contains(filter, StringComparison.OrdinalIgnoreCase));
+        }
+
+        // Sort
+        if (!string.IsNullOrWhiteSpace(sort))
+        {
+            var sortParts = sort.Split(',');
+            var sortBy = sortParts[0].Trim();
+            var sortDir = sortParts.Length > 1 ? sortParts[1].Trim().ToLower() : "asc";
+
+            filtered = sortBy.ToLower() switch
+            {
+                "valor" => sortDir == "desc" ? filtered.OrderByDescending(d => d.Valor) : filtered.OrderBy(d => d.Valor),
+                "datacompra" => sortDir == "desc" ? filtered.OrderByDescending(d => d.DataCompra) : filtered.OrderBy(d => d.DataCompra),
+                "moeda" => sortDir == "desc" ? filtered.OrderByDescending(d => d.Moeda) : filtered.OrderBy(d => d.Moeda),
+                _ => filtered.OrderBy(d => d.Id)
+            };
+        }
+        else
+        {
+            filtered = filtered.OrderBy(d => d.Id);
+        }
+
+        var totalItems = filtered.Count();
+        var totalPages = (int)Math.Ceiling((double)totalItems / size);
+        var items = filtered.Skip((page - 1) * size).Take(size).ToList();
+
+        var dtos = new List<DespesaDto>();
+        foreach (var despesa in items)
+        {
+            var categoria = await _categoriaRepository.GetByIdAsync(despesa.CategoriaId, ct);
+            dtos.Add(new DespesaDto(despesa.Id, despesa.UsuarioId, despesa.CategoriaId, despesa.Valor, despesa.Moeda, despesa.DataCompra, despesa.Descricao, categoria?.Nome));
+        }
+
+        var links = new Dictionary<string, string>
+        {
+            ["self"] = $"/api/despesas/search?usuarioId={usuarioId}&filter={filter}&sort={sort}&page={page}&size={size}"
+        };
+        if (page > 1) links["prev"] = $"/api/despesas/search?usuarioId={usuarioId}&filter={filter}&sort={sort}&page={page - 1}&size={size}";
+        if (page < totalPages) links["next"] = $"/api/despesas/search?usuarioId={usuarioId}&filter={filter}&sort={sort}&page={page + 1}&size={size}";
+        links["first"] = $"/api/despesas/search?usuarioId={usuarioId}&filter={filter}&sort={sort}&page=1&size={size}";
+        links["last"] = $"/api/despesas/search?usuarioId={usuarioId}&filter={filter}&sort={sort}&page={totalPages}&size={size}";
+
+        return new PaginatedResponse<DespesaDto>(dtos, page, size, totalPages, totalItems, links);
+    }
+
     public async Task<DespesaDto?> GetByIdAsync(long id, CancellationToken ct = default)
     {
         var despesa = await _despesaRepository.GetByIdAsync(id, ct);
         if (despesa == null) return null;
         var categoria = await _categoriaRepository.GetByIdAsync(despesa.CategoriaId, ct);
-        return new DespesaDto(despesa.Id, despesa.UsuarioId, despesa.CategoriaId, despesa.Valor, despesa.Moeda, despesa.DataCompra, despesa.Descricao, categoria?.Nome);
+        return new DespesaDto(despesa.Id, despesa.UsuarioId, despesa.CategoriaId, despesa.Valor, despesa.Moeda, despesa.DataCompra, despesa.Descricao, categoria?.Nome, new Dictionary<string, string> { ["self"] = $"/api/despesas/{id}" });
     }
 
     public async Task<IEnumerable<DespesaDto>> GetByUsuarioIdAsync(long usuarioId, CancellationToken ct = default)

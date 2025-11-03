@@ -13,10 +13,60 @@ public class CategoriaService
         _categoriaRepository = categoriaRepository;
     }
 
+    public async Task<PaginatedResponse<CategoriaDto>> SearchAsync(string? filter, string? sort, int page = 1, int size = 10, CancellationToken ct = default)
+    {
+        if (page < 1) page = 1;
+        if (size < 1 || size > 100) size = 10;
+
+        var query = await _categoriaRepository.GetAllAsync(ct);
+        var filtered = query.AsQueryable();
+
+        // Filter
+        if (!string.IsNullOrWhiteSpace(filter))
+        {
+            filtered = filtered.Where(c => c.Nome.Contains(filter, StringComparison.OrdinalIgnoreCase));
+        }
+
+        // Sort
+        if (!string.IsNullOrWhiteSpace(sort))
+        {
+            var sortParts = sort.Split(',');
+            var sortBy = sortParts[0].Trim();
+            var sortDir = sortParts.Length > 1 ? sortParts[1].Trim().ToLower() : "asc";
+
+            filtered = sortBy.ToLower() switch
+            {
+                "nome" => sortDir == "desc" ? filtered.OrderByDescending(c => c.Nome) : filtered.OrderBy(c => c.Nome),
+                _ => filtered.OrderBy(c => c.Id)
+            };
+        }
+        else
+        {
+            filtered = filtered.OrderBy(c => c.Id);
+        }
+
+        var totalItems = filtered.Count();
+        var totalPages = (int)Math.Ceiling((double)totalItems / size);
+        var items = filtered.Skip((page - 1) * size).Take(size).ToList();
+
+        var dtos = items.Select(c => new CategoriaDto(c.Id, c.Nome)).ToList();
+
+        var links = new Dictionary<string, string>
+        {
+            ["self"] = $"/api/categorias/search?filter={filter}&sort={sort}&page={page}&size={size}"
+        };
+        if (page > 1) links["prev"] = $"/api/categorias/search?filter={filter}&sort={sort}&page={page - 1}&size={size}";
+        if (page < totalPages) links["next"] = $"/api/categorias/search?filter={filter}&sort={sort}&page={page + 1}&size={size}";
+        links["first"] = $"/api/categorias/search?filter={filter}&sort={sort}&page=1&size={size}";
+        links["last"] = $"/api/categorias/search?filter={filter}&sort={sort}&page={totalPages}&size={size}";
+
+        return new PaginatedResponse<CategoriaDto>(dtos, page, size, totalPages, totalItems, links);
+    }
+
     public async Task<CategoriaDto?> GetByIdAsync(long id, CancellationToken ct = default)
     {
         var categoria = await _categoriaRepository.GetByIdAsync(id, ct);
-        return categoria == null ? null : new CategoriaDto(categoria.Id, categoria.Nome);
+        return categoria == null ? null : new CategoriaDto(categoria.Id, categoria.Nome, new Dictionary<string, string> { ["self"] = $"/api/categorias/{id}" });
     }
 
     public async Task<CategoriaDto?> GetByNomeAsync(string nome, CancellationToken ct = default)

@@ -26,6 +26,14 @@ public static class CategoriasEndpoints
             }
         });
 
+        grp.MapGet("search", async (CategoriaService service, string? filter, string? sort, int page = 1, int size = 10) =>
+        {
+            if (page < 1) return Results.BadRequest("Page must be greater than 0.");
+            if (size < 1 || size > 100) return Results.BadRequest("Size must be between 1 and 100.");
+            var result = await service.SearchAsync(filter, sort, page, size);
+            return Results.Ok(result);
+        });
+
         grp.MapGet("", async (CategoriaService service) =>
             await service.GetAllAsync());
 
