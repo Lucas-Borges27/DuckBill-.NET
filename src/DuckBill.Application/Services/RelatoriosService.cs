@@ -1,4 +1,5 @@
 using DuckBill.Application.DTOs;
+using DuckBill.Application.Observability;
 using DuckBill.Domain.Interfaces;
 using DuckBill.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,7 @@ public class RelatoriosService
 
     public async Task<Top3GastosResponse> Top3GastosDoMesAsync(long usuarioId,int mes,int ano,string moedaAlvo,CancellationToken ct=default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("RelatoriosService.Top3GastosDoMesAsync");
         var inicio = new DateTime(ano, mes, 1);
         var fim = inicio.AddMonths(1);
         var agregados = await _db.Despesas.AsNoTracking()

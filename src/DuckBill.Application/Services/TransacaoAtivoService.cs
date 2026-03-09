@@ -1,4 +1,5 @@
 using DuckBill.Application.DTOs;
+using DuckBill.Application.Observability;
 using DuckBill.Domain.Entities;
 using DuckBill.Domain.Interfaces;
 
@@ -19,6 +20,7 @@ public class TransacaoAtivoService
 
     public async Task<PaginatedResponse<TransacaoDto>> SearchAsync(long? usuarioId, string? filter, string? sort, int page = 1, int size = 10, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("TransacaoAtivoService.SearchAsync");
         if (page < 1) page = 1;
         if (size < 1 || size > 100) size = 10;
 
@@ -72,18 +74,21 @@ public class TransacaoAtivoService
 
     public async Task<TransacaoDto?> GetByIdAsync(long id, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("TransacaoAtivoService.GetByIdAsync");
         var transacao = await _transacaoRepository.GetByIdAsync(id, ct);
         return transacao == null ? null : new TransacaoDto(transacao.Id, transacao.UsuarioId, transacao.AtivoId, transacao.Tipo, transacao.Qtd, transacao.Preco, transacao.DataNegocio, new Dictionary<string, string> { ["self"] = $"/api/transacoes-ativo/{id}" });
     }
 
     public async Task<IEnumerable<TransacaoDto>> GetByUsuarioIdAsync(long usuarioId, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("TransacaoAtivoService.GetByUsuarioIdAsync");
         var transacoes = await _transacaoRepository.GetByUsuarioIdAsync(usuarioId, ct);
         return transacoes.Select(t => new TransacaoDto(t.Id, t.UsuarioId, t.AtivoId, t.Tipo, t.Qtd, t.Preco, t.DataNegocio));
     }
 
     public async Task<TransacaoDto> CreateAsync(TransacaoCreateDto dto, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("TransacaoAtivoService.CreateAsync");
         if (dto.Qtd <= 0) throw new ArgumentException("Quantidade deve ser maior que zero.");
         if (dto.Preco <= 0) throw new ArgumentException("Preço deve ser maior que zero.");
         if (string.IsNullOrWhiteSpace(dto.Tipo) || (dto.Tipo != "BUY" && dto.Tipo != "SELL")) throw new ArgumentException("Tipo deve ser BUY ou SELL.");
@@ -110,6 +115,7 @@ public class TransacaoAtivoService
 
     public async Task UpdateAsync(long id, TransacaoCreateDto dto, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("TransacaoAtivoService.UpdateAsync");
         var transacao = await _transacaoRepository.GetByIdAsync(id, ct);
         if (transacao == null) throw new KeyNotFoundException("Transação não encontrada.");
 
@@ -135,6 +141,7 @@ public class TransacaoAtivoService
 
     public async Task DeleteAsync(long id, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("TransacaoAtivoService.DeleteAsync");
         var transacao = await _transacaoRepository.GetByIdAsync(id, ct);
         if (transacao == null) throw new KeyNotFoundException("Transação não encontrada.");
 

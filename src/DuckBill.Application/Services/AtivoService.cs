@@ -1,4 +1,5 @@
 using DuckBill.Application.DTOs;
+using DuckBill.Application.Observability;
 using DuckBill.Domain.Entities;
 using DuckBill.Domain.Interfaces;
 
@@ -15,6 +16,7 @@ public class AtivoService
 
     public async Task<PaginatedResponse<AtivoDto>> SearchAsync(string? filter, string? sort, int page = 1, int size = 10, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("AtivoService.SearchAsync");
         if (page < 1) page = 1;
         if (size < 1 || size > 100) size = 10;
 
@@ -69,24 +71,28 @@ public class AtivoService
 
     public async Task<AtivoDto?> GetByIdAsync(long id, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("AtivoService.GetByIdAsync");
         var ativo = await _ativoRepository.GetByIdAsync(id, ct);
         return ativo == null ? null : new AtivoDto(ativo.Id, ativo.Ticker, ativo.Tipo, ativo.MoedaBase, new Dictionary<string, string> { ["self"] = $"/api/ativos/{id}" });
     }
 
     public async Task<AtivoDto?> GetByTickerAsync(string ticker, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("AtivoService.GetByTickerAsync");
         var ativo = await _ativoRepository.GetByTickerAsync(ticker, ct);
         return ativo == null ? null : new AtivoDto(ativo.Id, ativo.Ticker, ativo.Tipo, ativo.MoedaBase);
     }
 
     public async Task<IEnumerable<AtivoDto>> GetAllAsync(CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("AtivoService.GetAllAsync");
         var ativos = await _ativoRepository.GetAllAsync(ct);
         return ativos.Select(a => new AtivoDto(a.Id, a.Ticker, a.Tipo, a.MoedaBase));
     }
 
     public async Task<AtivoDto> CreateAsync(AtivoCreateDto dto, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("AtivoService.CreateAsync");
         if (string.IsNullOrWhiteSpace(dto.Ticker)) throw new ArgumentException("Ticker é obrigatório.");
         if (string.IsNullOrWhiteSpace(dto.Tipo)) throw new ArgumentException("Tipo é obrigatório.");
         if (string.IsNullOrWhiteSpace(dto.MoedaBase)) throw new ArgumentException("Moeda base é obrigatória.");
@@ -101,6 +107,7 @@ public class AtivoService
 
     public async Task UpdateAsync(long id, AtivoCreateDto dto, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("AtivoService.UpdateAsync");
         var ativo = await _ativoRepository.GetByIdAsync(id, ct);
         if (ativo == null) throw new KeyNotFoundException("Ativo não encontrado.");
 
@@ -119,6 +126,7 @@ public class AtivoService
 
     public async Task DeleteAsync(long id, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("AtivoService.DeleteAsync");
         var ativo = await _ativoRepository.GetByIdAsync(id, ct);
         if (ativo == null) throw new KeyNotFoundException("Ativo não encontrado.");
 

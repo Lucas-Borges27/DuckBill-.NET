@@ -1,4 +1,5 @@
 using DuckBill.Application.DTOs;
+using DuckBill.Application.Observability;
 using DuckBill.Domain.Entities;
 using DuckBill.Domain.Interfaces;
 
@@ -19,6 +20,7 @@ public class DespesaService
 
     public async Task<PaginatedResponse<DespesaDto>> SearchAsync(long? usuarioId, string? filter, string? sort, int page = 1, int size = 10, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("DespesaService.SearchAsync");
         if (page < 1) page = 1;
         if (size < 1 || size > 100) size = 10;
 
@@ -77,6 +79,7 @@ public class DespesaService
 
     public async Task<DespesaDto?> GetByIdAsync(long id, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("DespesaService.GetByIdAsync");
         var despesa = await _despesaRepository.GetByIdAsync(id, ct);
         if (despesa == null) return null;
         var categoria = await _categoriaRepository.GetByIdAsync(despesa.CategoriaId, ct);
@@ -85,6 +88,7 @@ public class DespesaService
 
     public async Task<IEnumerable<DespesaDto>> GetByUsuarioIdAsync(long usuarioId, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("DespesaService.GetByUsuarioIdAsync");
         var despesas = await _despesaRepository.GetByUsuarioIdAsync(usuarioId, ct);
         var result = new List<DespesaDto>();
         foreach (var despesa in despesas)
@@ -97,6 +101,7 @@ public class DespesaService
 
     public async Task<IEnumerable<DespesaDto>> GetByUsuarioIdAndMesAnoAsync(long usuarioId, int mes, int ano, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("DespesaService.GetByUsuarioIdAndMesAnoAsync");
         var despesas = await _despesaRepository.GetByUsuarioIdAndMesAnoAsync(usuarioId, mes, ano, ct);
         var result = new List<DespesaDto>();
         foreach (var despesa in despesas)
@@ -109,6 +114,7 @@ public class DespesaService
 
     public async Task<DespesaDto> CreateAsync(DespesaCreateDto dto, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("DespesaService.CreateAsync");
         if (dto.Valor <= 0) throw new ArgumentException("Valor deve ser maior que zero.");
         if (string.IsNullOrWhiteSpace(dto.Moeda)) throw new ArgumentException("Moeda é obrigatória.");
         if (dto.DataCompra > DateTime.Now) throw new ArgumentException("Data de compra não pode ser futura.");
@@ -134,6 +140,7 @@ public class DespesaService
 
     public async Task UpdateAsync(long id, DespesaCreateDto dto, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("DespesaService.UpdateAsync");
         var despesa = await _despesaRepository.GetByIdAsync(id, ct);
         if (despesa == null) throw new KeyNotFoundException("Despesa não encontrada.");
 
@@ -158,6 +165,7 @@ public class DespesaService
 
     public async Task DeleteAsync(long id, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("DespesaService.DeleteAsync");
         var despesa = await _despesaRepository.GetByIdAsync(id, ct);
         if (despesa == null) throw new KeyNotFoundException("Despesa não encontrada.");
 

@@ -8,7 +8,7 @@
 ## Definição do Projeto
 
 ### Visão Geral do Projeto
-DuckBill .NET é uma aplicação de gerenciamento financeiro pessoal desenvolvida em ASP.NET Core 8 com Entity Framework Core, utilizando banco de dados Oracle. O sistema permite o controle completo de usuários, categorias de despesas, despesas, ativos financeiros e transações de ativos. Inclui integração com API externa para conversão de moedas em tempo real, relatórios financeiros e uma API REST completa com documentação Swagger.
+DuckBill .NET é uma aplicação de gerenciamento financeiro pessoal desenvolvida em ASP.NET Core 8 com Entity Framework Core, utilizando banco de dados Oracle. O sistema permite o controle completo de usuários, categorias de despesas, despesas, ativos financeiros e transações de ativos. Inclui integração com API externa para conversão de moedas em tempo real, relatórios financeiros e uma API REST completa com documentação Swagger, além de observabilidade (health checks, logs estruturados e OpenTelemetry com métricas e tracing).
 
 ### Objetivo do Projeto
 Este projeto tem como objetivo desenvolver uma aplicação para gerenciamento financeiro pessoal, permitindo o controle de usuários, categorias de despesas e despesas associadas, integrando com banco de dados Oracle para persistência dos dados. Inclui funcionalidades avançadas como busca paginada, ordenação, filtros e links HATEOAS para navegação.
@@ -94,7 +94,7 @@ dotnet restore
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "User Id=your_user;Password=your_password;Data Source=your_oracle_datasource;"
+    "Default": "User Id=your_user;Password=your_password;Data Source=your_oracle_datasource;"
   }
 }
 ```
@@ -115,6 +115,33 @@ dotnet run
 ### Banco de Dados
 - Utiliza Oracle Database para persistência.
 - Migrações gerenciadas via Entity Framework Core.
+
+## Monitoramento e Observabilidade (Sprint 3)
+
+### Endpoints de Health Check
+- `GET /health/live` - verifica saúde da API (liveness)
+- `GET /health/ready` - verifica dependências (DB Oracle + AwesomeApi)
+
+### Métricas e Tracing
+- Métricas expostas em `GET /metrics` (OpenTelemetry + Prometheus exporter)
+- Tracing com OpenTelemetry para requisições HTTP (API e chamadas externas), EF Core e chamadas entre camadas (Application)
+
+### Logging Estruturado
+- Serilog com logs estruturados no console e em arquivo
+- Arquivos em `logs/log-YYYYMMDD.json`
+- Correlação de requisições via header `X-Correlation-ID`
+
+### Autenticação (opcional por configuração)
+- API Key via header `X-API-KEY`
+- Ative em `appsettings.json` com:
+```json
+{
+  "Authentication": {
+    "Enabled": true,
+    "ApiKey": "sua-chave"
+  }
+}
+```
 
 ## Migrações
 ```bash
@@ -198,6 +225,22 @@ curl -X POST http://localhost:5000/api/usuarios \
   -d '{"nome":"João Silva","email":"joao@email.com","senha":"123456"}'
 ```
 
+## Testes Automatizados (Sprint 3)
+
+### Executar todos os testes
+```bash
+dotnet test
+```
+
+### Estrutura de testes
+- `tests/DuckBill.UnitTests` (Domínio e Aplicação)
+- `tests/DuckBill.IntegrationTests` (API com WebApplicationFactory)
+
+### Padrões adotados
+- AAA (Arrange, Act, Assert)
+- Nomenclatura: `MetodoTestado_Cenario_ResultadoEsperado`
+- Uso de Moq para mocks
+
 #### GET - Conversão de Moedas
 ```bash
 curl "http://localhost:5000/api/relatorios/cambio?from=USD&to=BRL&valor=100"
@@ -221,4 +264,3 @@ curl -X DELETE http://localhost:5000/api/usuarios/1
 ```
 
 # Swagger: http://localhost:5000/swagger
-

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DuckBill.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28a722ed718337d9129530a83f6d355028fd6529")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8fd034924c691debc60017606dbdfe68d47b24fd")]
 [assembly: System.Reflection.AssemblyProductAttribute("DuckBill.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DuckBill.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

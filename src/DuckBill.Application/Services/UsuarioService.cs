@@ -1,4 +1,5 @@
 using DuckBill.Application.DTOs;
+using DuckBill.Application.Observability;
 using DuckBill.Domain.Entities;
 using DuckBill.Domain.Interfaces;
 
@@ -15,6 +16,7 @@ public class UsuarioService
 
     public async Task<PaginatedResponse<UsuarioDto>> SearchAsync(string? filter, string? sort, int page = 1, int size = 10, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("UsuarioService.SearchAsync");
         if (page < 1) page = 1;
         if (size < 1 || size > 100) size = 10;
 
@@ -67,24 +69,28 @@ public class UsuarioService
 
     public async Task<UsuarioDto?> GetByIdAsync(long id, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("UsuarioService.GetByIdAsync");
         var usuario = await _usuarioRepository.GetByIdAsync(id, ct);
         return usuario == null ? null : new UsuarioDto(usuario.Id, usuario.Nome, usuario.Email, new Dictionary<string, string> { ["self"] = $"/api/usuarios/{id}" });
     }
 
     public async Task<UsuarioDto?> GetByEmailAsync(string email, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("UsuarioService.GetByEmailAsync");
         var usuario = await _usuarioRepository.GetByEmailAsync(email, ct);
         return usuario == null ? null : new UsuarioDto(usuario.Id, usuario.Nome, usuario.Email);
     }
 
     public async Task<IEnumerable<UsuarioDto>> GetAllAsync(CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("UsuarioService.GetAllAsync");
         var usuarios = await _usuarioRepository.GetAllAsync(ct);
         return usuarios.Select(u => new UsuarioDto(u.Id, u.Nome, u.Email));
     }
 
     public async Task<UsuarioDto> CreateAsync(UsuarioCreateDto dto, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("UsuarioService.CreateAsync");
         if (string.IsNullOrWhiteSpace(dto.Nome)) throw new ArgumentException("Nome é obrigatório.");
         if (string.IsNullOrWhiteSpace(dto.Email)) throw new ArgumentException("Email é obrigatório.");
         if (string.IsNullOrWhiteSpace(dto.Senha)) throw new ArgumentException("Senha é obrigatória.");
@@ -99,6 +105,7 @@ public class UsuarioService
 
     public async Task UpdateAsync(long id, UsuarioCreateDto dto, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("UsuarioService.UpdateAsync");
         var usuario = await _usuarioRepository.GetByIdAsync(id, ct);
         if (usuario == null) throw new KeyNotFoundException("Usuário não encontrado.");
 
@@ -117,6 +124,7 @@ public class UsuarioService
 
     public async Task DeleteAsync(long id, CancellationToken ct = default)
     {
+        using var activity = Telemetry.ActivitySource.StartActivity("UsuarioService.DeleteAsync");
         var usuario = await _usuarioRepository.GetByIdAsync(id, ct);
         if (usuario == null) throw new KeyNotFoundException("Usuário não encontrado.");
 

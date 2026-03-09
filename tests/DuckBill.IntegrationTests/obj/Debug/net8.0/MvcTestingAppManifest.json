@@ -1,0 +1,6 @@
+{
+  "DuckBill.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/lucasborges\/Documents\/Fiap\/Challenge\/DotNET\/Sprint3\/DuckBill-.NET\/src\/DuckBill.Api",
+  "DuckBill.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/lucasborges\/Documents\/Fiap\/Challenge\/DotNET\/Sprint3\/DuckBill-.NET\/src\/DuckBill.Application",
+  "DuckBill.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/lucasborges\/Documents\/Fiap\/Challenge\/DotNET\/Sprint3\/DuckBill-.NET\/src\/DuckBill.Domain",
+  "DuckBill.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/lucasborges\/Documents\/Fiap\/Challenge\/DotNET\/Sprint3\/DuckBill-.NET\/src\/DuckBill.Infrastructure"
+}
