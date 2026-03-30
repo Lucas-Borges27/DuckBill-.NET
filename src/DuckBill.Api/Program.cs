@@ -10,6 +10,7 @@ using DuckBill.Infrastructure.External;
 using Microsoft.EntityFrameworkCore;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
+using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Compact;
@@ -72,11 +73,14 @@ builder.Services.AddOpenTelemetry()
         .AddSource(Telemetry.ActivitySourceName)
         .AddConsoleExporter())
     .WithMetrics(metrics => metrics
+        .AddMeter(ApplicationMetrics.MeterName)
         .AddAspNetCoreInstrumentation()
         .AddHttpClientInstrumentation()
         .AddPrometheusExporter());
 
 var app = builder.Build();
+
+app.UseMiddleware<RequestMetricsMiddleware>();
 
 // Global exception handling
 app.Use(async (context, next) =>
@@ -87,6 +91,7 @@ app.Use(async (context, next) =>
     }
     catch (Exception ex)
     {
+        app.Logger.LogError(ex, "Unhandled exception while processing {Method} {Path}", context.Request.Method, context.Request.Path);
         context.Response.StatusCode = 500;
         await context.Response.WriteAsJsonAsync(new { error = "An unexpected error occurred.", details = ex.Message });
     }
@@ -101,6 +106,20 @@ if (builder.Configuration.GetValue<bool>("Authentication:Enabled"))
 
 app.UseSerilogRequestLogging(options =>
 {
+    options.GetLevel = (httpContext, _, exception) =>
+    {
+        if (exception is not null || httpContext.Response.StatusCode >= StatusCodes.Status500InternalServerError)
+        {
+            return LogEventLevel.Error;
+        }
+
+        if (httpContext.Response.StatusCode >= StatusCodes.Status400BadRequest)
+        {
+            return LogEventLevel.Warning;
+        }
+
+        return LogEventLevel.Information;
+    };
     options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
     {
         diagnosticContext.Set("CorrelationId", httpContext.Items["X-Correlation-ID"]?.ToString());
@@ -138,6 +157,8 @@ app.MapHealthChecks("/health/ready", new Microsoft.AspNetCore.Diagnostics.Health
 });
 
 app.MapPrometheusScrapingEndpoint("/metrics");
+
+app.Logger.LogInformation("DuckBill API started with health endpoints at /health/live and /health/ready, and metrics at /metrics");
 
 app.Run();
 

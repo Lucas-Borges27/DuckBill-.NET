@@ -46,8 +46,11 @@ public class UsuarioServiceTests
 
         var service = new UsuarioService(repo.Object);
 
-        // Act & Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(() => service.CreateAsync(dto));
+        // Act
+        var act = () => service.CreateAsync(dto);
+
+        // Assert
+        await Assert.ThrowsAsync<InvalidOperationException>(act);
     }
 
     [Fact]
@@ -62,7 +65,10 @@ public class UsuarioServiceTests
 
         var service = new UsuarioService(repo.Object);
 
-        // Act & Assert
-        await Assert.ThrowsAsync<KeyNotFoundException>(() => service.UpdateAsync(99, dto));
+        // Act
+        var act = () => service.UpdateAsync(99, dto);
+
+        // Assert
+        await Assert.ThrowsAsync<KeyNotFoundException>(act);
     }
 }

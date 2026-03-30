@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DuckBill.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8fd034924c691debc60017606dbdfe68d47b24fd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec3cae82717f5d158d29a9f07ccb2472e2296e0b")]
 [assembly: System.Reflection.AssemblyProductAttribute("DuckBill.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DuckBill.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

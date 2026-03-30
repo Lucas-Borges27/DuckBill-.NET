@@ -26,6 +26,8 @@ public sealed class ApiKeyMiddleware
         var expectedApiKey = _configuration["Authentication:ApiKey"];
         if (string.IsNullOrWhiteSpace(expectedApiKey))
         {
+            var logger = context.RequestServices.GetRequiredService<ILogger<ApiKeyMiddleware>>();
+            logger.LogError("Authentication is enabled but the API key is not configured");
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             await context.Response.WriteAsJsonAsync(new { error = "API key não configurada." });
             return;
@@ -33,6 +35,8 @@ public sealed class ApiKeyMiddleware
 
         if (!context.Request.Headers.TryGetValue(HeaderName, out var provided) || provided != expectedApiKey)
         {
+            var logger = context.RequestServices.GetRequiredService<ILogger<ApiKeyMiddleware>>();
+            logger.LogWarning("Unauthorized request for {Path}: API key missing or invalid", context.Request.Path);
             context.Response.StatusCode = StatusCodes.Status401Unauthorized;
             await context.Response.WriteAsJsonAsync(new { error = "API key inválida ou ausente." });
             return;

@@ -121,15 +121,41 @@ dotnet run
 ### Endpoints de Health Check
 - `GET /health/live` - verifica saúde da API (liveness)
 - `GET /health/ready` - verifica dependências (DB Oracle + AwesomeApi)
+- Resposta em JSON com `status`, `totalDurationMs` e detalhe de cada verificação
+
+#### Exemplos
+```bash
+curl http://localhost:5000/health/live
+curl http://localhost:5000/health/ready
+```
 
 ### Métricas e Tracing
 - Métricas expostas em `GET /metrics` (OpenTelemetry + Prometheus exporter)
 - Tracing com OpenTelemetry para requisições HTTP (API e chamadas externas), EF Core e chamadas entre camadas (Application)
+- Métricas customizadas expostas:
+  - `duckbill_http_server_request_duration_ms`: tempo de resposta das requisições
+  - `duckbill_http_server_requests`: total de requisições HTTP
+  - `duckbill_http_server_request_errors`: total de requisições HTTP com erro
+
+#### Como monitorar
+1. Inicie a API com `dotnet run` em `src/DuckBill.Api`
+2. Consulte `GET /health/live` para saúde básica da API
+3. Consulte `GET /health/ready` para validar banco e serviço externo
+4. Consulte `GET /metrics` para métricas em formato Prometheus
+5. Observe o console para spans OpenTelemetry exportados
+6. Consulte os arquivos em `src/DuckBill.Api/logs/` ou `bin/Debug/net8.0/logs/` para logs estruturados
+
+#### Exemplo de coleta de métricas
+```bash
+curl http://localhost:5000/metrics
+```
 
 ### Logging Estruturado
 - Serilog com logs estruturados no console e em arquivo
 - Arquivos em `logs/log-YYYYMMDD.json`
 - Correlação de requisições via header `X-Correlation-ID`
+- Logs com níveis `Information`, `Warning` e `Error`
+- Requests `2xx/3xx` geram `Information`, `4xx` geram `Warning` e `5xx`/exceções geram `Error`
 
 ### Autenticação (opcional por configuração)
 - API Key via header `X-API-KEY`
@@ -232,6 +258,12 @@ curl -X POST http://localhost:5000/api/usuarios \
 dotnet test
 ```
 
+### Executar por projeto
+```bash
+dotnet test tests/DuckBill.UnitTests/DuckBill.UnitTests.csproj
+dotnet test tests/DuckBill.IntegrationTests/DuckBill.IntegrationTests.csproj
+```
+
 ### Estrutura de testes
 - `tests/DuckBill.UnitTests` (Domínio e Aplicação)
 - `tests/DuckBill.IntegrationTests` (API com WebApplicationFactory)
@@ -240,6 +272,8 @@ dotnet test
 - AAA (Arrange, Act, Assert)
 - Nomenclatura: `MetodoTestado_Cenario_ResultadoEsperado`
 - Uso de Moq para mocks
+- Uso de Collection Fixture para compartilhar `WebApplicationFactory` entre testes de integração
+- Cobertura de autenticação, sucesso, erro, health checks e métricas
 
 #### GET - Conversão de Moedas
 ```bash
