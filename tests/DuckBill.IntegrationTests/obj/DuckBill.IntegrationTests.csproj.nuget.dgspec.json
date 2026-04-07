@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/tests/DuckBill.IntegrationTests/DuckBill.IntegrationTests.csproj": {}
+    "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/tests/DuckBill.IntegrationTests/DuckBill.IntegrationTests.csproj": {}
   },
   "projects": {
-    "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Api/DuckBill.Api.csproj": {
+    "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Api/DuckBill.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Api/DuckBill.Api.csproj",
+        "projectUniqueName": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Api/DuckBill.Api.csproj",
         "projectName": "DuckBill.Api",
-        "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Api/DuckBill.Api.csproj",
+        "projectPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Api/DuckBill.Api.csproj",
         "packagesPath": "/Users/lucasborges/.nuget/packages/",
-        "outputPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Api/obj/",
+        "outputPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/lucasborges/.nuget/NuGet/NuGet.Config"
@@ -26,11 +26,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Application/DuckBill.Application.csproj": {
-                "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Application/DuckBill.Application.csproj"
+              "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Application/DuckBill.Application.csproj": {
+                "projectPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Application/DuckBill.Application.csproj"
               },
-              "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj": {
-                "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj"
+              "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj": {
+                "projectPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj"
               }
             }
           }
@@ -45,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -129,18 +129,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Application/DuckBill.Application.csproj": {
+    "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Application/DuckBill.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Application/DuckBill.Application.csproj",
+        "projectUniqueName": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Application/DuckBill.Application.csproj",
         "projectName": "DuckBill.Application",
-        "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Application/DuckBill.Application.csproj",
+        "projectPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Application/DuckBill.Application.csproj",
         "packagesPath": "/Users/lucasborges/.nuget/packages/",
-        "outputPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Application/obj/",
+        "outputPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/lucasborges/.nuget/NuGet/NuGet.Config"
@@ -155,11 +155,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj": {
-                "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj"
+              "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj": {
+                "projectPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj"
               },
-              "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj": {
-                "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj"
+              "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj": {
+                "projectPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj"
               }
             }
           }
@@ -174,7 +174,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -195,18 +195,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj": {
+    "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj",
+        "projectUniqueName": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj",
         "projectName": "DuckBill.Domain",
-        "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj",
+        "projectPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj",
         "packagesPath": "/Users/lucasborges/.nuget/packages/",
-        "outputPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/obj/",
+        "outputPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/lucasborges/.nuget/NuGet/NuGet.Config"
@@ -233,7 +233,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -254,18 +254,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj": {
+    "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj",
+        "projectUniqueName": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj",
         "projectName": "DuckBill.Infrastructure",
-        "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj",
+        "projectPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj",
         "packagesPath": "/Users/lucasborges/.nuget/packages/",
-        "outputPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/obj/",
+        "outputPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/lucasborges/.nuget/NuGet/NuGet.Config"
@@ -280,8 +280,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj": {
-                "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj"
+              "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj": {
+                "projectPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj"
               }
             }
           }
@@ -296,7 +296,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -327,18 +327,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/tests/DuckBill.IntegrationTests/DuckBill.IntegrationTests.csproj": {
+    "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/tests/DuckBill.IntegrationTests/DuckBill.IntegrationTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/tests/DuckBill.IntegrationTests/DuckBill.IntegrationTests.csproj",
+        "projectUniqueName": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/tests/DuckBill.IntegrationTests/DuckBill.IntegrationTests.csproj",
         "projectName": "DuckBill.IntegrationTests",
-        "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/tests/DuckBill.IntegrationTests/DuckBill.IntegrationTests.csproj",
+        "projectPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/tests/DuckBill.IntegrationTests/DuckBill.IntegrationTests.csproj",
         "packagesPath": "/Users/lucasborges/.nuget/packages/",
-        "outputPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/tests/DuckBill.IntegrationTests/obj/",
+        "outputPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/tests/DuckBill.IntegrationTests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/lucasborges/.nuget/NuGet/NuGet.Config"
@@ -353,11 +353,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Api/DuckBill.Api.csproj": {
-                "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Api/DuckBill.Api.csproj"
+              "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Api/DuckBill.Api.csproj": {
+                "projectPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Api/DuckBill.Api.csproj"
               },
-              "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj": {
-                "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj"
+              "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj": {
+                "projectPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj"
               }
             }
           }
@@ -372,7 +372,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -389,6 +389,12 @@
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.9.0, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.2, )"
             },
             "xunit": {
               "target": "Package",
@@ -417,7 +423,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

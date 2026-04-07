@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:o="urn:schemas-microsoft-com:office:office"
+            xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+            xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"
+            xmlns:v="urn:schemas-microsoft-com:vml"
+            xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing"
+            xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"
+            xmlns:w10="urn:schemas-microsoft-com:office:word"
+            xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+            xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
+            xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"
+            xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk"
+            xmlns:wne="http://schemas.microsoft.com/office/2006/wordml"
+            xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"
+            mc:Ignorable="w14 wp14">
+  <w:body>
+    <w:p>
+      <w:r><w:t>Advanced Business Development with .NET - Sprint 3</w:t></w:r>
+    </w:p>
+    <w:p/>
+    <w:p>
+      <w:r><w:t>Integrantes do Time</w:t></w:r>
+    </w:p>
+    <w:p>
+      <w:r><w:t>Bruno Carlos Soares - RM 559250</w:t></w:r>
+    </w:p>
+    <w:p>
+      <w:r><w:t>Lucas Borges de Souza - RM 560027</w:t></w:r>
+    </w:p>
+    <w:p>
+      <w:r><w:t>Pedro Henrique Rodrigues - RM 560393</w:t></w:r>
+    </w:p>
+    <w:p/>
+    <w:p>
+      <w:r><w:t>Link do GitHub</w:t></w:r>
+    </w:p>
+    <w:p>
+      <w:r><w:t>https://github.com/Lucas-Borges27/DuckBill-.NET.git</w:t></w:r>
+    </w:p>
+    <w:p/>
+    <w:p>
+      <w:r><w:t>Link do Video</w:t></w:r>
+    </w:p>
+    <w:p>
+      <w:r><w:t>PREENCHER AQUI O LINK DO VIDEO DA APRESENTACAO</w:t></w:r>
+    </w:p>
+    <w:p/>
+    <w:p>
+      <w:r><w:t>Observacao: o professor precisa ter acesso ao video.</w:t></w:r>
+    </w:p>
+    <w:sectPr>
+      <w:pgSz w:w="11906" w:h="16838"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0"/>
+    </w:sectPr>
+  </w:body>
+</w:document>

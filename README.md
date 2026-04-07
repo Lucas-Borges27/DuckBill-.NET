@@ -42,6 +42,8 @@ O sistema permitirá:
 - Uso de Entity Framework Core para acesso a dados.
 - Documentação da API via Swagger.
 - Configuração via arquivos JSON.
+- Observabilidade com health checks, logs estruturados, tracing distribuído e métricas Prometheus/OpenTelemetry.
+- Testes automatizados separados por camada, seguindo padrão AAA.
 
 ## Desenho da Arquitetura
 
@@ -121,7 +123,7 @@ dotnet run
 ### Endpoints de Health Check
 - `GET /health/live` - verifica saúde da API (liveness)
 - `GET /health/ready` - verifica dependências (DB Oracle + AwesomeApi)
-- Resposta em JSON com `status`, `totalDurationMs` e detalhe de cada verificação
+- Resposta em JSON com `status`, `totalDurationMs` e detalhe de cada verificação, incluindo metadados das dependências monitoradas
 
 #### Exemplos
 ```bash
@@ -131,7 +133,7 @@ curl http://localhost:5000/health/ready
 
 ### Métricas e Tracing
 - Métricas expostas em `GET /metrics` (OpenTelemetry + Prometheus exporter)
-- Tracing com OpenTelemetry para requisições HTTP (API e chamadas externas), EF Core e chamadas entre camadas (Application)
+- Tracing com OpenTelemetry para requisições HTTP (API e chamadas externas), EF Core e chamadas entre camadas (Application Services)
 - Métricas customizadas expostas:
   - `duckbill_http_server_request_duration_ms`: tempo de resposta das requisições
   - `duckbill_http_server_requests`: total de requisições HTTP
@@ -144,6 +146,7 @@ curl http://localhost:5000/health/ready
 4. Consulte `GET /metrics` para métricas em formato Prometheus
 5. Observe o console para spans OpenTelemetry exportados
 6. Consulte os arquivos em `src/DuckBill.Api/logs/` ou `bin/Debug/net8.0/logs/` para logs estruturados
+7. Envie opcionalmente o header `X-Correlation-ID` para correlacionar chamadas ponta a ponta
 
 #### Exemplo de coleta de métricas
 ```bash
@@ -156,6 +159,7 @@ curl http://localhost:5000/metrics
 - Correlação de requisições via header `X-Correlation-ID`
 - Logs com níveis `Information`, `Warning` e `Error`
 - Requests `2xx/3xx` geram `Information`, `4xx` geram `Warning` e `5xx`/exceções geram `Error`
+- Em erros não tratados, a resposta inclui `correlationId` e `traceId` para facilitar diagnóstico
 
 ### Autenticação (opcional por configuração)
 - API Key via header `X-API-KEY`
@@ -176,6 +180,34 @@ dotnet add ../DuckBill.Infrastructure package Microsoft.EntityFrameworkCore.Tool
 dotnet ef migrations add Initial --project ../DuckBill.Infrastructure --startup-project .
 dotnet ef database update --project ../DuckBill.Infrastructure --startup-project .
 ```
+
+## Testes Automatizados
+
+### Organização
+- `tests/DuckBill.UnitTests`: testes unitários das camadas de Domínio e Aplicação com xUnit, Moq e padrão AAA
+- `tests/DuckBill.IntegrationTests`: testes de integração dos endpoints com `WebApplicationFactory`, `CollectionFixture` e banco em memória
+- Convenção de nomes adotada: `MetodoTestado_Cenario_ResultadoEsperado`
+
+### Como executar
+```bash
+dotnet test
+```
+
+### Executar por camada
+```bash
+dotnet test tests/DuckBill.UnitTests/DuckBill.UnitTests.csproj
+dotnet test tests/DuckBill.IntegrationTests/DuckBill.IntegrationTests.csproj
+```
+
+### Cobertura de testes
+```bash
+dotnet test --collect:"XPlat Code Coverage"
+```
+
+### Cenários cobertos
+- Testes unitários de criação, atualização, paginação, validações e regras de negócio em `UsuarioService` e `DespesaService`
+- Testes unitários básicos das entidades de domínio (`Usuario`, `Categoria`, `Despesa`)
+- Testes de integração para autenticação via API Key, CRUD de usuários, health checks, métricas e propagação do `X-Correlation-ID`
 
 ## Endpoints da API
 

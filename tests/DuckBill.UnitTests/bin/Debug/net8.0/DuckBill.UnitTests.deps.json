@@ -12,8 +12,7 @@
           "DuckBill.Domain": "1.0.0",
           "Microsoft.NET.Test.Sdk": "17.9.0",
           "Moq": "4.20.70",
-          "xunit": "2.8.1",
-          "xunit.runner.visualstudio": "2.8.1"
+          "xunit": "2.8.1"
         },
         "runtime": {
           "DuckBill.UnitTests.dll": {}
@@ -41,7 +40,6 @@
       "Microsoft.EntityFrameworkCore/8.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Abstractions": "8.0.0",
-          "Microsoft.EntityFrameworkCore.Analyzers": "8.0.0",
           "Microsoft.Extensions.Caching.Memory": "8.0.0",
           "Microsoft.Extensions.Logging": "8.0.0"
         },
@@ -60,7 +58,6 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/8.0.0": {},
       "Microsoft.EntityFrameworkCore.Relational/8.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "8.0.0",
@@ -180,9 +177,6 @@
         }
       },
       "Microsoft.TestPlatform.ObjectModel/17.9.0": {
-        "dependencies": {
-          "System.Reflection.Metadata": "1.6.0"
-        },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.TestPlatform.CoreUtilities.dll": {
             "assemblyVersion": "15.0.0.0",
@@ -540,7 +534,6 @@
       },
       "System.DirectoryServices/6.0.1": {
         "dependencies": {
-          "System.Security.AccessControl": "6.0.0",
           "System.Security.Permissions": "6.0.0"
         },
         "runtime": {
@@ -611,8 +604,6 @@
           }
         }
       },
-      "System.Reflection.Metadata/1.6.0": {},
-      "System.Security.AccessControl/6.0.0": {},
       "System.Security.Cryptography.ProtectedData/6.0.0": {
         "runtime": {
           "lib/net6.0/System.Security.Cryptography.ProtectedData.dll": {
@@ -631,7 +622,6 @@
       },
       "System.Security.Permissions/6.0.0": {
         "dependencies": {
-          "System.Security.AccessControl": "6.0.0",
           "System.Windows.Extensions": "6.0.0"
         },
         "runtime": {
@@ -662,7 +652,6 @@
       },
       "xunit/2.8.1": {
         "dependencies": {
-          "xunit.analyzers": "1.14.0",
           "xunit.assert": "2.8.1",
           "xunit.core": "2.8.1"
         }
@@ -675,7 +664,6 @@
           }
         }
       },
-      "xunit.analyzers/1.14.0": {},
       "xunit.assert/2.8.1": {
         "runtime": {
           "lib/net6.0/xunit.assert.dll": {
@@ -712,7 +700,6 @@
           }
         }
       },
-      "xunit.runner.visualstudio/2.8.1": {},
       "DuckBill.Application/1.0.0": {
         "dependencies": {
           "DuckBill.Domain": "1.0.0",
@@ -781,13 +768,6 @@
       "sha512": "sha512-VR22s3+zoqlVI7xauFKn1znSIFHO8xuILT+noSwS8bZCKcHz0ydkTDQMuaxSa5WBaQrZmwtTz9rmRvJ7X8mSPQ==",
       "path": "microsoft.entityframeworkcore.abstractions/8.0.0",
       "hashPath": "microsoft.entityframeworkcore.abstractions.8.0.0.nupkg.sha512"
-    },
-    "Microsoft.EntityFrameworkCore.Analyzers/8.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-ZXxEeLs2zoZ1TA+QoMMcw4f3Tirf8PzgdDax8RoWo0dxI2KmqiEGWYjhm2B/XyWfglc6+mNRyB8rZiQSmxCpeg==",
-      "path": "microsoft.entityframeworkcore.analyzers/8.0.0",
-      "hashPath": "microsoft.entityframeworkcore.analyzers.8.0.0.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Relational/8.0.0": {
       "type": "package",
@@ -957,20 +937,6 @@
       "path": "system.drawing.common/6.0.0",
       "hashPath": "system.drawing.common.6.0.0.nupkg.sha512"
     },
-    "System.Reflection.Metadata/1.6.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-COC1aiAJjCoA5GBF+QKL2uLqEBew4JsCkQmoHKbN3TlOZKa2fKLz5CpiRQKDz0RsAOEGsVKqOD5bomsXq/4STQ==",
-      "path": "system.reflection.metadata/1.6.0",
-      "hashPath": "system.reflection.metadata.1.6.0.nupkg.sha512"
-    },
-    "System.Security.AccessControl/6.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-AUADIc0LIEQe7MzC+I0cl0rAT8RrTAKFHl53yHjEUzNVIaUlhFY11vc2ebiVJzVBuOzun6F7FBA+8KAbGTTedQ==",
-      "path": "system.security.accesscontrol/6.0.0",
-      "hashPath": "system.security.accesscontrol.6.0.0.nupkg.sha512"
-    },
     "System.Security.Cryptography.ProtectedData/6.0.0": {
       "type": "package",
       "serviceable": true,
@@ -1006,13 +972,6 @@
       "path": "xunit.abstractions/2.0.3",
       "hashPath": "xunit.abstractions.2.0.3.nupkg.sha512"
     },
-    "xunit.analyzers/1.14.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-KcFBmV2150xZHPUebV3YLR5gGl8R4wLuPOoxMiwCf1L4bL8ls0dcwtGFzr6NvQRgg6dWgSqbE52I6SYyeB0VnQ==",
-      "path": "xunit.analyzers/1.14.0",
-      "hashPath": "xunit.analyzers.1.14.0.nupkg.sha512"
-    },
     "xunit.assert/2.8.1": {
       "type": "package",
       "serviceable": true,
@@ -1040,13 +999,6 @@
       "sha512": "sha512-38UnJW+64Wn8QIabujcNEw0HKvWw2AlYCgU8GNwCCDqyrSuRYb7zwetn7SHoHfbL9e9FAvEiAMXmc2wSUY8sVQ==",
       "path": "xunit.extensibility.execution/2.8.1",
       "hashPath": "xunit.extensibility.execution.2.8.1.nupkg.sha512"
-    },
-    "xunit.runner.visualstudio/2.8.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-qBTK0WAcnw65mymIjVDqWUTdqjMyzjwu9e9SF0oGYfYELgbcteDZ4fQLJaXw8mzkvpAD7YdoexBbg8VYQFkWWA==",
-      "path": "xunit.runner.visualstudio/2.8.1",
-      "hashPath": "xunit.runner.visualstudio.2.8.1.nupkg.sha512"
     },
     "DuckBill.Application/1.0.0": {
       "type": "project",

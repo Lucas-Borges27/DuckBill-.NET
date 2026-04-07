@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "dptiEXQNylg=",
+  "dgSpecHash": "QLWAWVhdNPA=",
   "success": true,
-  "projectFilePath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/tests/DuckBill.UnitTests/DuckBill.UnitTests.csproj",
+  "projectFilePath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/tests/DuckBill.UnitTests/DuckBill.UnitTests.csproj",
   "expectedPackageFiles": [
     "/Users/lucasborges/.nuget/packages/castle.core/5.1.1/castle.core.5.1.1.nupkg.sha512",
+    "/Users/lucasborges/.nuget/packages/coverlet.collector/6.0.2/coverlet.collector.6.0.2.nupkg.sha512",
     "/Users/lucasborges/.nuget/packages/microsoft.codecoverage/17.9.0/microsoft.codecoverage.17.9.0.nupkg.sha512",
     "/Users/lucasborges/.nuget/packages/microsoft.entityframeworkcore/8.0.0/microsoft.entityframeworkcore.8.0.0.nupkg.sha512",
     "/Users/lucasborges/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.0/microsoft.entityframeworkcore.abstractions.8.0.0.nupkg.sha512",

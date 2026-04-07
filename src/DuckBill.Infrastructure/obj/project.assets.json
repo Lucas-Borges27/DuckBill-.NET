@@ -1258,11 +1258,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj",
+      "projectUniqueName": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj",
       "projectName": "DuckBill.Infrastructure",
-      "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj",
+      "projectPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/DuckBill.Infrastructure.csproj",
       "packagesPath": "/Users/lucasborges/.nuget/packages/",
-      "outputPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/obj/",
+      "outputPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Infrastructure/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/lucasborges/.nuget/NuGet/NuGet.Config"
@@ -1277,8 +1277,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj": {
-              "projectPath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj"
+            "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj": {
+              "projectPath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj"
             }
           }
         }
@@ -1293,7 +1293,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -1324,7 +1324,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

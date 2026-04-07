@@ -9,6 +9,7 @@ using DuckBill.Infrastructure.Repositories;
 using DuckBill.Infrastructure.External;
 using Microsoft.EntityFrameworkCore;
 using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Microsoft.Extensions.Logging;
 using Serilog;
@@ -55,10 +56,12 @@ builder.Services.AddScoped<AtivoService>();
 builder.Services.AddScoped<TransacaoAtivoService>();
 builder.Services.AddScoped<RelatoriosService>();
 
-builder.Services.AddHttpClient<ICambioService, AwesomeApiCambioService>(c =>
+builder.Services.AddHttpClient("awesomeapi", c =>
 {
     c.BaseAddress = new Uri(builder.Configuration["Integrations:AwesomeApi:BaseUrl"] ?? "https://economia.awesomeapi.com.br/");
 });
+
+builder.Services.AddHttpClient<ICambioService, AwesomeApiCambioService>("awesomeapi");
 
 builder.Services.AddHealthChecks()
     .AddCheck("self", () => Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult.Healthy("API saudável"), tags: new[] { "live" })
@@ -66,6 +69,7 @@ builder.Services.AddHealthChecks()
     .AddCheck<ExternalServiceHealthCheck>("awesomeapi", tags: new[] { "ready" });
 
 builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource.AddService(serviceName: "DuckBill.Api", serviceVersion: typeof(Program).Assembly.GetName().Version?.ToString() ?? "1.0.0"))
     .WithTracing(tracing => tracing
         .AddAspNetCoreInstrumentation()
         .AddEntityFrameworkCoreInstrumentation()
@@ -80,6 +84,7 @@ builder.Services.AddOpenTelemetry()
 
 var app = builder.Build();
 
+app.UseMiddleware<CorrelationIdMiddleware>();
 app.UseMiddleware<RequestMetricsMiddleware>();
 
 // Global exception handling
@@ -93,11 +98,15 @@ app.Use(async (context, next) =>
     {
         app.Logger.LogError(ex, "Unhandled exception while processing {Method} {Path}", context.Request.Method, context.Request.Path);
         context.Response.StatusCode = 500;
-        await context.Response.WriteAsJsonAsync(new { error = "An unexpected error occurred.", details = ex.Message });
+        await context.Response.WriteAsJsonAsync(new
+        {
+            error = "An unexpected error occurred.",
+            details = ex.Message,
+            correlationId = context.Items["X-Correlation-ID"]?.ToString(),
+            traceId = Activity.Current?.TraceId.ToString()
+        });
     }
 });
-
-app.UseMiddleware<CorrelationIdMiddleware>();
 
 if (builder.Configuration.GetValue<bool>("Authentication:Enabled"))
 {

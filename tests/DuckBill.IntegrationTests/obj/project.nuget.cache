@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "UCHaEeQZFZ8=",
+  "dgSpecHash": "6tyZAMGc1eI=",
   "success": true,
-  "projectFilePath": "/Users/lucasborges/Documents/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/tests/DuckBill.IntegrationTests/DuckBill.IntegrationTests.csproj",
+  "projectFilePath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/tests/DuckBill.IntegrationTests/DuckBill.IntegrationTests.csproj",
   "expectedPackageFiles": [
+    "/Users/lucasborges/.nuget/packages/coverlet.collector/6.0.2/coverlet.collector.6.0.2.nupkg.sha512",
     "/Users/lucasborges/.nuget/packages/microsoft.aspnetcore.mvc.testing/8.0.3/microsoft.aspnetcore.mvc.testing.8.0.3.nupkg.sha512",
     "/Users/lucasborges/.nuget/packages/microsoft.aspnetcore.testhost/8.0.3/microsoft.aspnetcore.testhost.8.0.3.nupkg.sha512",
     "/Users/lucasborges/.nuget/packages/microsoft.codecoverage/17.9.0/microsoft.codecoverage.17.9.0.nupkg.sha512",

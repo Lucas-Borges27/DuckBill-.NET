@@ -45,6 +45,8 @@ public class ObservabilityEndpointsTests
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Contains("oracle-db", body);
         Assert.Contains("awesomeapi", body);
+        Assert.Contains("baseUrl", body);
+        Assert.Contains("healthPath", body);
     }
 
     [Fact]
@@ -67,5 +69,23 @@ public class ObservabilityEndpointsTests
         Assert.Contains("duckbill_http_server_request_duration_ms", metricsBody);
         Assert.Contains("duckbill_http_server_request_errors", metricsBody);
         Assert.Contains("duckbill_http_server_requests", metricsBody);
+    }
+
+    [Fact]
+    public async Task GetUsuarios_ComCorrelationId_ReplicaHeaderNaResposta()
+    {
+        // Arrange
+        await _factory.ResetDatabaseAsync();
+        var client = _factory.CreateClient();
+        client.DefaultRequestHeaders.Add("X-API-KEY", "test-key");
+        client.DefaultRequestHeaders.Add("X-Correlation-ID", "video-sprint3");
+
+        // Act
+        var response = await client.GetAsync("/api/usuarios");
+
+        // Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.True(response.Headers.TryGetValues("X-Correlation-ID", out var values));
+        Assert.Contains("video-sprint3", values);
     }
 }

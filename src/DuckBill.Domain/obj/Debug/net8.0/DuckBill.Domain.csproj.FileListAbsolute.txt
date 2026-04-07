@@ -45,3 +45,15 @@
 /Users/lucasborges/Library/CloudStorage/Box-Box/00-IBM/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/obj/Debug/net8.0/refint/DuckBill.Domain.dll
 /Users/lucasborges/Library/CloudStorage/Box-Box/00-IBM/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/obj/Debug/net8.0/DuckBill.Domain.pdb
 /Users/lucasborges/Library/CloudStorage/Box-Box/00-IBM/Fiap/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/obj/Debug/net8.0/ref/DuckBill.Domain.dll
+/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/bin/Debug/net8.0/DuckBill.Domain.deps.json
+/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/bin/Debug/net8.0/DuckBill.Domain.dll
+/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/bin/Debug/net8.0/DuckBill.Domain.pdb
+/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/obj/Debug/net8.0/DuckBill.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/obj/Debug/net8.0/DuckBill.Domain.AssemblyInfoInputs.cache
+/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/obj/Debug/net8.0/DuckBill.Domain.AssemblyInfo.cs
+/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/obj/Debug/net8.0/DuckBill.Domain.csproj.CoreCompileInputs.cache
+/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/obj/Debug/net8.0/DuckBill.Domain.sourcelink.json
+/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/obj/Debug/net8.0/DuckBill.Domain.dll
+/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/obj/Debug/net8.0/refint/DuckBill.Domain.dll
+/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/obj/Debug/net8.0/DuckBill.Domain.pdb
+/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/obj/Debug/net8.0/ref/DuckBill.Domain.dll
