@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6UlDifxfipY=",
+  "dgSpecHash": "0U7imurnSeYX2vBQlUC2/dEpKuC6WoZ60Ayn3w2JclPA8tSJrWByDw0Fe9/lVbkLEGMkWgq2vBFVw6ZxbmyJXw==",
   "success": true,
-  "projectFilePath": "/Users/lucasborges/FIAP/Challenge/DotNET/Sprint3/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj",
+  "projectFilePath": "/Users/lucasborges/00-Lucas/FIAP/Challenge/DotNET/Sprint4/DuckBill-.NET/src/DuckBill.Domain/DuckBill.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

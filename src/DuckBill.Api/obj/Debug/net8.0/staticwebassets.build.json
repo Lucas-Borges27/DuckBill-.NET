@@ -1,1 +1,11 @@
-{"Version":1,"Hash":"0eELEGtFQILEP0UUPrGhnM4SerOatKr7PEtH8lpTWJ8=","Source":"DuckBill.Api","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
+{
+  "Version": 1,
+  "Hash": "sAxE9/+zl+AUykSF7vlO76zV1LRi25FbINDXdjXtw2c=",
+  "Source": "DuckBill.Api",
+  "BasePath": "_content/DuckBill.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

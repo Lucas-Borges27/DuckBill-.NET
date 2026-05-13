@@ -8,6 +8,7 @@ using DuckBill.Infrastructure;
 using DuckBill.Infrastructure.Repositories;
 using DuckBill.Infrastructure.External;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -32,9 +33,17 @@ builder.Host.UseSerilog((context, services, logger) =>
 });
 
 // Oracle DB
+var oracleConnectionString = Environment.GetEnvironmentVariable("ORACLE_CONNECTION_STRING")
+    ?? builder.Configuration.GetConnectionString("Default");
+
+if (string.IsNullOrWhiteSpace(oracleConnectionString))
+{
+    throw new InvalidOperationException("Oracle connection string not configured. Set ORACLE_CONNECTION_STRING environment variable.");
+}
+
 builder.Services.AddDbContext<DuckBillDbContext>(opt =>
 {
-    opt.UseOracle(builder.Configuration.GetConnectionString("Default"));
+    opt.UseOracle(oracleConnectionString);
 });
 
 builder.Services.AddEndpointsApiExplorer();
@@ -44,6 +53,25 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IDespesaRepository, DespesaRepository>();
+
+// MongoDB
+var mongoConnectionString = Environment.GetEnvironmentVariable("MONGODB_URI")
+    ?? builder.Configuration["MongoDB:ConnectionString"];
+
+if (!string.IsNullOrWhiteSpace(mongoConnectionString))
+{
+    var mongoClient = new MongoClient(mongoConnectionString);
+    var databaseName = builder.Configuration["MongoDB:DatabaseName"] ?? "DuckBillDB";
+    var mongoDatabase = mongoClient.GetDatabase(databaseName);
+    
+    builder.Services.AddSingleton<IMongoDatabase>(mongoDatabase);
+    builder.Services.AddScoped<IDespesaMongoRepository, DespesaMongoRepository>();
+}
+else
+{
+    builder.Services.AddScoped<IDespesaMongoRepository>(sp =>
+        throw new InvalidOperationException("MongoDB not configured. Set MONGODB_URI environment variable."));
+}
 builder.Services.AddScoped<IAtivoRepository, AtivoRepository>();
 builder.Services.AddScoped<ITransacaoAtivoRepository, TransacaoAtivoRepository>();
 builder.Services.AddScoped<ICotacaoAtivoRepository, CotacaoAtivoRepository>();

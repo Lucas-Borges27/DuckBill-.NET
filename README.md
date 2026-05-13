@@ -1,213 +1,246 @@
-# DuckBill .NET (ASP.NET Core 8 + EF Core)
+# DuckBill .NET - Sistema de Gerenciamento Financeiro Pessoal
 
-## Integrantes
-- Bruno Carlos Soares RM 559250 
-- Lucas Borges de Souza RM 560027 
-- Pedro Henrique Rodrigues RM 560393
+## 📋 Integrantes do Grupo
+- **Nome:** _____________________ **RM:** _____
+- **Nome:** _____________________ **RM:** _____
+- **Nome:** _____________________ **RM:** _____
 
-## Definição do Projeto
+## 📖 Sobre o Projeto
 
-### Visão Geral do Projeto
-DuckBill .NET é uma aplicação de gerenciamento financeiro pessoal desenvolvida em ASP.NET Core 8 com Entity Framework Core, utilizando banco de dados Oracle. O sistema permite o controle completo de usuários, categorias de despesas, despesas, ativos financeiros e transações de ativos. Inclui integração com API externa para conversão de moedas em tempo real, relatórios financeiros e uma API REST completa com documentação Swagger, além de observabilidade (health checks, logs estruturados e OpenTelemetry com métricas e tracing).
+### Visão Geral
+DuckBill .NET é uma aplicação completa de gerenciamento financeiro pessoal desenvolvida em **ASP.NET Core 8** seguindo os princípios de **Clean Architecture**. O sistema oferece controle completo de usuários, categorias de despesas, despesas, ativos financeiros e transações de ativos, com integração a múltiplos bancos de dados (Oracle e MongoDB) e API externa para conversão de moedas em tempo real.
 
-### Objetivo do Projeto
-Este projeto tem como objetivo desenvolver uma aplicação para gerenciamento financeiro pessoal, permitindo o controle de usuários, categorias de despesas e despesas associadas, integrando com banco de dados Oracle para persistência dos dados. Inclui funcionalidades avançadas como busca paginada, ordenação, filtros e links HATEOAS para navegação.
+### Tecnologias Utilizadas
+- **.NET 8** - Framework principal
+- **ASP.NET Core Minimal API** - API REST
+- **Entity Framework Core** - ORM para Oracle
+- **Oracle Database** - Banco de dados relacional principal
+- **MongoDB** - Banco de dados NoSQL para despesas
+- **Serilog** - Logging estruturado
+- **OpenTelemetry** - Observabilidade (métricas e tracing)
+- **Swagger/OpenAPI** - Documentação da API
+- **xUnit + Moq** - Testes automatizados
+- **Docker** - Containerização
 
-### Escopo
-O sistema permitirá:
-- Cadastro, consulta, atualização e exclusão de usuários.
-- Gerenciamento de categorias de despesas.
-- Registro e controle de despesas por usuário e categoria.
-- Gerenciamento de ativos financeiros (ações, fundos, etc.) com cotações em tempo real.
-- Controle de transações de ativos (compra/venda).
-- Conversão de moedas em tempo real via integração com API externa.
-- Relatórios financeiros (top 3 gastos do mês).
-- Exposição de API REST completa para integração com clientes externos.
-- Documentação da API via Swagger.
-- Busca avançada com paginação, ordenação e filtros para todos os domínios.
-- Links HATEOAS para navegação entre recursos.
+### Arquitetura
+O projeto segue **Clean Architecture** com 4 camadas bem definidas:
 
-### Requisitos Funcionais
-- CRUD completo para usuários, categorias, despesas, ativos e transações de ativos.
-- Validação de dados de entrada com mensagens de erro apropriadas.
-- Tratamento de erros e respostas HTTP adequadas (400, 404, 500).
-- Relatórios financeiros (top 3 gastos do mês por usuário).
-- Conversão de moedas em tempo real via API externa (AwesomeAPI).
-- Autenticação e autorização (a implementar).
-- Integração com banco Oracle para persistência de dados.
+```
+DuckBill-.NET/
+├── src/
+│   ├── DuckBill.Domain/          # Entidades e interfaces
+│   ├── DuckBill.Application/     # Serviços e DTOs
+│   ├── DuckBill.Infrastructure/  # Repositórios e integrações externas
+│   └── DuckBill.Api/             # Endpoints e configuração
+└── tests/
+    ├── DuckBill.UnitTests/       # Testes unitários
+    └── DuckBill.IntegrationTests/ # Testes de integração
+```
 
-### Requisitos Não Funcionais
-- Arquitetura limpa para separação de responsabilidades.
-- Código desacoplado e testável.
-- Uso de Entity Framework Core para acesso a dados.
-- Documentação da API via Swagger.
-- Configuração via arquivos JSON.
-- Observabilidade com health checks, logs estruturados, tracing distribuído e métricas Prometheus/OpenTelemetry.
-- Testes automatizados separados por camada, seguindo padrão AAA.
+### Funcionalidades Principais
+- ✅ CRUD completo para Usuários, Categorias, Despesas, Ativos e Transações
+- ✅ Persistência dual: Oracle (relacional) + MongoDB (NoSQL para despesas)
+- ✅ Busca avançada com paginação, ordenação e filtros
+- ✅ Conversão de moedas em tempo real (AwesomeAPI)
+- ✅ Relatórios financeiros (top 3 gastos do mês)
+- ✅ Health checks (liveness e readiness)
+- ✅ Métricas Prometheus e tracing OpenTelemetry
+- ✅ Logging estruturado com Serilog
+- ✅ Autenticação via API Key (opcional)
+- ✅ Documentação Swagger/OpenAPI
+- ✅ Containerização com Docker
 
-## Desenho da Arquitetura
-
-### Clean Architecture
-O projeto segue os princípios da Clean Architecture para garantir a separação clara entre as camadas, facilitando manutenção, testes e evolução do sistema.
-
-### Camadas da Aplicação
-
-- **Apresentação (DuckBill.Api):**
-  - Contém a API REST, configuração do servidor, mapeamento de endpoints e documentação Swagger.
-  - Responsável por expor os serviços da aplicação para clientes externos.
-
-- **Aplicação (DuckBill.Application):**
-  - Implementa os serviços e casos de uso do sistema.
-  - Contém DTOs para comunicação entre camadas.
-  - Define interfaces para repositórios e implementa a lógica de negócios.
-
-- **Domínio (DuckBill.Domain):**
-  - Contém os modelos de domínio e regras de negócio.
-  - Define as entidades principais do sistema: usuários, categorias, despesas, ativos financeiros (Ativo), cotações (CotacaoAtivo) e transações (TransacaoAtivo).
-  - Contém interfaces para repositórios e serviços externos (ICambioService).
-
-- **Infraestrutura (DuckBill.Infrastructure):**
-  - Implementa o acesso a dados usando Entity Framework Core com Oracle.
-  - Contém os repositórios concretos para todas as entidades.
-  - Gerencia migrações de banco de dados.
-  - Implementa integrações externas (AwesomeAPI para conversão de moedas).
-
-## Instruções de Instalação e Configuração
+## 🚀 Como Executar o Projeto
 
 ### Pré-requisitos
-- .NET 8 SDK
-- Oracle Database (ou Docker com Oracle XE)
-- Git
+- **.NET 8 SDK** instalado
+- Acesso ao **Oracle Database** (oracle.fiap.com.br)
+- **MongoDB** (local ou Atlas) - opcional
+- **Docker** (para execução containerizada) - opcional
 
-### Instalação
-1. Clone o repositório:
+### Variáveis de Ambiente Necessárias
+
+O projeto utiliza variáveis de ambiente para configurações sensíveis:
+
+| Variável | Descrição | Obrigatória | Exemplo |
+|----------|-----------|-------------|---------|
+| `ORACLE_CONNECTION_STRING` | String de conexão Oracle | ✅ Sim | `User Id=RM12345;Password=senha;Data Source=oracle.fiap.com.br:1521/ORCL` |
+| `API_KEY` | Chave de autenticação da API | ⚠️ Se auth habilitada | `minha-chave-secreta-123` |
+| `MONGODB_URI` | URI de conexão MongoDB | ⚠️ Para endpoints Mongo | `mongodb://localhost:27017` ou `mongodb+srv://user:pass@cluster.mongodb.net` |
+
+### Execução Local
+
+1. **Clone o repositório:**
 ```bash
 git clone <repository-url>
 cd DuckBill-.NET
 ```
 
-2. Restaure as dependências:
+2. **Configure as variáveis de ambiente:**
+
+**Linux/macOS:**
 ```bash
-cd src/DuckBill.Api
+export ORACLE_CONNECTION_STRING="User Id=RM12345;Password=senha;Data Source=oracle.fiap.com.br:1521/ORCL"
+export MONGODB_URI="mongodb://localhost:27017"
+export API_KEY="minha-chave-secreta"
+```
+
+**Windows (PowerShell):**
+```powershell
+$env:ORACLE_CONNECTION_STRING="User Id=RM12345;Password=senha;Data Source=oracle.fiap.com.br:1521/ORCL"
+$env:MONGODB_URI="mongodb://localhost:27017"
+$env:API_KEY="minha-chave-secreta"
+```
+
+3. **Restaure as dependências:**
+```bash
 dotnet restore
 ```
 
-3. Configure a string de conexão do banco de dados no arquivo `appsettings.json`:
-```json
-{
-  "ConnectionStrings": {
-    "Default": "User Id=your_user;Password=your_password;Data Source=your_oracle_datasource;"
-  }
-}
+4. **Execute as migrações do banco de dados Oracle:**
+```bash
+dotnet ef database update --project src/DuckBill.Infrastructure --startup-project src/DuckBill.Api
 ```
 
-4. Execute as migrações do banco de dados:
+5. **Execute a aplicação:**
 ```bash
-dotnet tool install --global dotnet-ef
-dotnet ef database update --project ../DuckBill.Infrastructure --startup-project .
-```
-
-5. Execute a aplicação:
-```bash
+cd src/DuckBill.Api
 dotnet run
 ```
 
-6. Acesse a documentação da API via Swagger em: http://localhost:5000/swagger
+6. **Acesse a aplicação:**
+- API: http://localhost:5000
+- Swagger: http://localhost:5000/swagger
+- Health Check (Live): http://localhost:5000/health/live
+- Health Check (Ready): http://localhost:5000/health/ready
+- Métricas: http://localhost:5000/metrics
 
-### Banco de Dados
-- Utiliza Oracle Database para persistência.
-- Migrações gerenciadas via Entity Framework Core.
+### Execução com Docker
 
-## Monitoramento e Observabilidade (Sprint 3)
-
-### Endpoints de Health Check
-- `GET /health/live` - verifica saúde da API (liveness)
-- `GET /health/ready` - verifica dependências (DB Oracle + AwesomeApi)
-- Resposta em JSON com `status`, `totalDurationMs` e detalhe de cada verificação, incluindo metadados das dependências monitoradas
-
-#### Exemplos
+1. **Build da imagem:**
 ```bash
-curl http://localhost:5000/health/live
-curl http://localhost:5000/health/ready
+docker build -t duckbill-api .
 ```
 
-### Métricas e Tracing
-- Métricas expostas em `GET /metrics` (OpenTelemetry + Prometheus exporter)
-- Tracing com OpenTelemetry para requisições HTTP (API e chamadas externas), EF Core e chamadas entre camadas (Application Services)
-- Métricas customizadas expostas:
-  - `duckbill_http_server_request_duration_ms`: tempo de resposta das requisições
-  - `duckbill_http_server_requests`: total de requisições HTTP
-  - `duckbill_http_server_request_errors`: total de requisições HTTP com erro
-
-#### Como monitorar
-1. Inicie a API com `dotnet run` em `src/DuckBill.Api`
-2. Consulte `GET /health/live` para saúde básica da API
-3. Consulte `GET /health/ready` para validar banco e serviço externo
-4. Consulte `GET /metrics` para métricas em formato Prometheus
-5. Observe o console para spans OpenTelemetry exportados
-6. Consulte os arquivos em `src/DuckBill.Api/logs/` ou `bin/Debug/net8.0/logs/` para logs estruturados
-7. Envie opcionalmente o header `X-Correlation-ID` para correlacionar chamadas ponta a ponta
-
-#### Exemplo de coleta de métricas
+2. **Execute o container:**
 ```bash
-curl http://localhost:5000/metrics
+docker run -d -p 5000:5000 \
+  -e ORACLE_CONNECTION_STRING="User Id=RM12345;Password=senha;Data Source=oracle.fiap.com.br:1521/ORCL" \
+  -e MONGODB_URI="mongodb://host.docker.internal:27017" \
+  -e API_KEY="minha-chave-secreta" \
+  --name duckbill \
+  duckbill-api
 ```
 
-### Logging Estruturado
-- Serilog com logs estruturados no console e em arquivo
-- Arquivos em `logs/log-YYYYMMDD.json`
-- Correlação de requisições via header `X-Correlation-ID`
-- Logs com níveis `Information`, `Warning` e `Error`
-- Requests `2xx/3xx` geram `Information`, `4xx` geram `Warning` e `5xx`/exceções geram `Error`
-- Em erros não tratados, a resposta inclui `correlationId` e `traceId` para facilitar diagnóstico
-
-### Autenticação (opcional por configuração)
-- API Key via header `X-API-KEY`
-- Ative em `appsettings.json` com:
-```json
-{
-  "Authentication": {
-    "Enabled": true,
-    "ApiKey": "sua-chave"
-  }
-}
-```
-
-## Migrações
+3. **Verifique os logs:**
 ```bash
-dotnet tool install --global dotnet-ef
-dotnet add ../DuckBill.Infrastructure package Microsoft.EntityFrameworkCore.Tools
-dotnet ef migrations add Initial --project ../DuckBill.Infrastructure --startup-project .
-dotnet ef database update --project ../DuckBill.Infrastructure --startup-project .
+docker logs -f duckbill
 ```
 
-## Testes Automatizados
+4. **Acesse:** http://localhost:5000/swagger
 
-### Organização
-- `tests/DuckBill.UnitTests`: testes unitários das camadas de Domínio e Aplicação com xUnit, Moq e padrão AAA
-- `tests/DuckBill.IntegrationTests`: testes de integração dos endpoints com `WebApplicationFactory`, `CollectionFixture` e banco em memória
-- Convenção de nomes adotada: `MetodoTestado_Cenario_ResultadoEsperado`
+## 🧪 Testes Automatizados
 
-### Como executar
+O projeto possui cobertura completa de testes seguindo o padrão **AAA (Arrange, Act, Assert)**.
+
+### Estrutura de Testes
+```
+tests/
+├── DuckBill.UnitTests/          # Testes unitários (Domain + Application)
+│   ├── Domain/                  # Testes de entidades
+│   └── Application/             # Testes de serviços
+└── DuckBill.IntegrationTests/   # Testes de integração (API)
+    ├── ApiFactory.cs            # WebApplicationFactory customizada
+    └── *EndpointsTests.cs       # Testes de endpoints
+```
+
+### Executar Todos os Testes
 ```bash
 dotnet test
 ```
 
-### Executar por camada
+### Executar por Projeto
 ```bash
+# Testes unitários
 dotnet test tests/DuckBill.UnitTests/DuckBill.UnitTests.csproj
+
+# Testes de integração
 dotnet test tests/DuckBill.IntegrationTests/DuckBill.IntegrationTests.csproj
 ```
 
-### Cobertura de testes
+### Cobertura de Código
 ```bash
 dotnet test --collect:"XPlat Code Coverage"
 ```
 
-### Cenários cobertos
-- Testes unitários de criação, atualização, paginação, validações e regras de negócio em `UsuarioService` e `DespesaService`
-- Testes unitários básicos das entidades de domínio (`Usuario`, `Categoria`, `Despesa`)
-- Testes de integração para autenticação via API Key, CRUD de usuários, health checks, métricas e propagação do `X-Correlation-ID`
+### Cenários Testados
+- ✅ Validações de entidades de domínio
+- ✅ Lógica de negócio nos serviços
+- ✅ CRUD completo de todos os endpoints
+- ✅ Autenticação via API Key
+- ✅ Health checks (live e ready)
+- ✅ Métricas e observabilidade
+- ✅ Tratamento de erros
+- ✅ Paginação e filtros
+
+## 📊 Observabilidade
+
+### Health Checks
+```bash
+# Verifica se a API está rodando
+curl http://localhost:5000/health/live
+
+# Verifica dependências (Oracle + AwesomeAPI)
+curl http://localhost:5000/health/ready
+```
+
+### Métricas Prometheus
+```bash
+# Exporta métricas em formato Prometheus
+curl http://localhost:5000/metrics
+```
+
+**Métricas disponíveis:**
+- `duckbill_http_server_request_duration_ms` - Tempo de resposta
+- `duckbill_http_server_requests` - Total de requisições
+- `duckbill_http_server_request_errors` - Total de erros
+
+### Logging Estruturado
+- Logs em JSON via **Serilog**
+- Arquivos em `logs/log-YYYYMMDD.json`
+- Correlação via header `X-Correlation-ID`
+- Níveis: `Information`, `Warning`, `Error`
+
+### Tracing Distribuído
+- **OpenTelemetry** para tracing
+- Instrumentação automática de HTTP, EF Core e Application Services
+- Spans exportados no console
+
+## 🔐 Autenticação (Opcional)
+
+Para habilitar autenticação via API Key:
+
+1. Configure no `appsettings.json`:
+```json
+{
+  "Authentication": {
+    "Enabled": true,
+    "ApiKey": "sua-chave-secreta"
+  }
+}
+```
+
+2. Ou use variável de ambiente:
+```bash
+export API_KEY="sua-chave-secreta"
+```
+
+3. Envie o header em todas as requisições:
+```bash
+curl -H "X-API-KEY: sua-chave-secreta" http://localhost:5000/api/usuarios
+```
+
+**Nota:** Endpoints `/health/*`, `/metrics` e `/swagger` não requerem autenticação.
 
 ## Endpoints da API
 
@@ -227,13 +260,17 @@ dotnet test --collect:"XPlat Code Coverage"
 - `PUT /api/categorias/{id}` - Atualiza categoria
 - `DELETE /api/categorias/{id}` - Remove categoria
 
-### Despesas
+### Despesas (Oracle)
 - `GET /api/despesas` - Lista todas as despesas
 - `GET /api/despesas/search?usuarioId={uid}&filter={f}&sort={s}&page={p}&size={sz}` - Busca paginada com filtros e ordenação (HATEOAS)
 - `GET /api/despesas/{id}` - Busca despesa por ID
 - `POST /api/despesas` - Cria nova despesa
 - `PUT /api/despesas/{id}` - Atualiza despesa
 - `DELETE /api/despesas/{id}` - Remove despesa
+
+### Despesas (MongoDB) 🆕
+- `GET /api/despesas/mongo` - Lista todas as despesas do MongoDB
+- `POST /api/despesas/mongo` - Cria nova despesa no MongoDB
 
 ### Ativos
 - `GET /api/ativos` - Lista todos os ativos
@@ -255,78 +292,71 @@ dotnet test --collect:"XPlat Code Coverage"
 - `GET /api/relatorios/top3-gastos?usuarioId={id}&mes={m}&ano={a}&moeda={moeda}` - Top 3 gastos do mês
 - `GET /api/relatorios/cambio?from={moeda}&to={moeda}&valor={valor}` - Conversão de moedas
 
-## Testando a API
+## 📝 Exemplos de Uso da API
 
-### Exemplos de Requisições
-
-#### GET - Listar Usuários
+### Usuários
 ```bash
+# Listar todos
 curl http://localhost:5000/api/usuarios
-```
 
-#### GET - Buscar Usuário por ID
-```bash
+# Buscar por ID
 curl http://localhost:5000/api/usuarios/1
-```
 
-#### POST - Criar Nova Categoria
-```bash
-curl -X POST http://localhost:5000/api/categorias \
-  -H "Content-Type: application/json" \
-  -d '{"nome":"Nova Categoria"}'
-```
-
-#### POST - Criar Novo Usuário
-```bash
+# Criar novo
 curl -X POST http://localhost:5000/api/usuarios \
   -H "Content-Type: application/json" \
   -d '{"nome":"João Silva","email":"joao@email.com","senha":"123456"}'
-```
 
-## Testes Automatizados (Sprint 3)
-
-### Executar todos os testes
-```bash
-dotnet test
-```
-
-### Executar por projeto
-```bash
-dotnet test tests/DuckBill.UnitTests/DuckBill.UnitTests.csproj
-dotnet test tests/DuckBill.IntegrationTests/DuckBill.IntegrationTests.csproj
-```
-
-### Estrutura de testes
-- `tests/DuckBill.UnitTests` (Domínio e Aplicação)
-- `tests/DuckBill.IntegrationTests` (API com WebApplicationFactory)
-
-### Padrões adotados
-- AAA (Arrange, Act, Assert)
-- Nomenclatura: `MetodoTestado_Cenario_ResultadoEsperado`
-- Uso de Moq para mocks
-- Uso de Collection Fixture para compartilhar `WebApplicationFactory` entre testes de integração
-- Cobertura de autenticação, sucesso, erro, health checks e métricas
-
-#### GET - Conversão de Moedas
-```bash
-curl "http://localhost:5000/api/relatorios/cambio?from=USD&to=BRL&valor=100"
-```
-
-#### GET - Busca Paginada de Usuários
-```bash
-curl "http://localhost:5000/api/usuarios/search?filter=João&sort=nome,desc&page=1&size=10"
-```
-
-#### PUT - Atualizar Categoria
-```bash
-curl -X PUT http://localhost:5000/api/categorias/1 \
+# Atualizar
+curl -X PUT http://localhost:5000/api/usuarios/1 \
   -H "Content-Type: application/json" \
-  -d '{"nome":"Categoria Atualizada"}'
-```
+  -d '{"nome":"João Silva Jr","email":"joao@email.com","senha":"123456"}'
 
-#### DELETE - Remover Usuário
-```bash
+# Deletar
 curl -X DELETE http://localhost:5000/api/usuarios/1
 ```
 
-# Swagger: http://localhost:5000/swagger
+### Despesas (Oracle)
+```bash
+# Criar despesa
+curl -X POST http://localhost:5000/api/despesas \
+  -H "Content-Type: application/json" \
+  -d '{"usuarioId":1,"categoriaId":1,"valor":150.50,"moeda":"BRL","dataCompra":"2024-01-15","descricao":"Supermercado"}'
+```
+
+### Despesas (MongoDB) 🆕
+```bash
+# Listar despesas do MongoDB
+curl http://localhost:5000/api/despesas/mongo
+
+# Criar despesa no MongoDB
+curl -X POST http://localhost:5000/api/despesas/mongo \
+  -H "Content-Type: application/json" \
+  -d '{"usuarioId":1,"categoriaId":1,"valor":150.50,"moeda":"BRL","dataCompra":"2024-01-15","descricao":"Supermercado"}'
+```
+
+### Relatórios
+```bash
+# Top 3 gastos do mês
+curl "http://localhost:5000/api/relatorios/top3-gastos?usuarioId=1&mes=1&ano=2024&moeda=BRL"
+
+# Conversão de moedas
+curl "http://localhost:5000/api/relatorios/cambio?from=USD&to=BRL&valor=100"
+```
+
+### Busca Paginada
+```bash
+# Buscar usuários com filtro e ordenação
+curl "http://localhost:5000/api/usuarios/search?filter=João&sort=nome,desc&page=1&size=10"
+```
+
+## 📚 Documentação Adicional
+
+- **Swagger UI:** http://localhost:5000/swagger
+- **Health Check (Live):** http://localhost:5000/health/live
+- **Health Check (Ready):** http://localhost:5000/health/ready
+- **Métricas Prometheus:** http://localhost:5000/metrics
+
+---
+
+**Desenvolvido com ❤️ para FIAP - Challenge Sprint 4**

@@ -1,5 +1,7 @@
 using DuckBill.Application.DTOs;
 using DuckBill.Application.Services;
+using DuckBill.Domain.Entities;
+using DuckBill.Domain.Interfaces;
 
 namespace DuckBill.Api.Endpoints;
 
@@ -81,6 +83,64 @@ public static class DespesasEndpoints
             catch (KeyNotFoundException)
             {
                 return Results.NotFound();
+            }
+        });
+
+        // MongoDB endpoints
+        grp.MapGet("mongo", async (IDespesaMongoRepository mongoRepo) =>
+        {
+            try
+            {
+                var despesas = await mongoRepo.GetAllAsync();
+                return Results.Ok(despesas);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Results.BadRequest(new { error = ex.Message });
+            }
+        });
+
+        grp.MapPost("mongo", async (DespesaCreateDto dto, IDespesaMongoRepository mongoRepo, ICategoriaRepository categoriaRepo, IUsuarioRepository usuarioRepo) =>
+        {
+            try
+            {
+                if (dto.Valor <= 0)
+                    return Results.BadRequest("Valor deve ser maior que zero.");
+                
+                if (string.IsNullOrWhiteSpace(dto.Moeda))
+                    return Results.BadRequest("Moeda é obrigatória.");
+                
+                if (dto.DataCompra > DateTime.Now)
+                    return Results.BadRequest("Data de compra não pode ser futura.");
+
+                var usuario = await usuarioRepo.GetByIdAsync(dto.UsuarioId);
+                if (usuario == null)
+                    return Results.BadRequest("Usuário não encontrado.");
+
+                var categoria = await categoriaRepo.GetByIdAsync(dto.CategoriaId);
+                if (categoria == null)
+                    return Results.BadRequest("Categoria não encontrada.");
+
+                var despesa = new Despesa
+                {
+                    UsuarioId = dto.UsuarioId,
+                    CategoriaId = dto.CategoriaId,
+                    Valor = dto.Valor,
+                    Moeda = dto.Moeda,
+                    DataCompra = dto.DataCompra,
+                    Descricao = dto.Descricao
+                };
+
+                await mongoRepo.AddAsync(despesa);
+                return Results.Created("/api/despesas/mongo", despesa);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Results.BadRequest(new { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem(ex.Message);
             }
         });
 

@@ -1,4 +1,5 @@
 using DuckBill.Domain.Entities;
+using DuckBill.Domain.Interfaces;
 using DuckBill.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -33,6 +34,7 @@ public class ApiFactory : WebApplicationFactory<Program>
         {
             services.RemoveAll(typeof(DbContextOptions<DuckBillDbContext>));
             services.RemoveAll(typeof(IHttpClientFactory));
+            services.RemoveAll(typeof(IDespesaMongoRepository));
 
             services.AddDbContext<DuckBillDbContext>(options =>
             {
@@ -40,6 +42,9 @@ public class ApiFactory : WebApplicationFactory<Program>
             });
 
             services.AddSingleton<IHttpClientFactory>(new FakeHttpClientFactory());
+            
+            // Mock MongoDB repository for tests
+            services.AddScoped<IDespesaMongoRepository, FakeMongoRepository>();
         });
     }
 
@@ -72,6 +77,27 @@ public class ApiFactory : WebApplicationFactory<Program>
         {
             var content = new StringContent("{\"status\":\"ok\"}", Encoding.UTF8, "application/json");
             return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK) { Content = content });
+        }
+    }
+
+    private sealed class FakeMongoRepository : IDespesaMongoRepository
+    {
+        private readonly List<Despesa> _despesas = new();
+
+        public Task<IEnumerable<Despesa>> GetAllAsync(CancellationToken ct = default)
+        {
+            return Task.FromResult<IEnumerable<Despesa>>(_despesas);
+        }
+
+        public Task<Despesa?> GetByIdAsync(string id, CancellationToken ct = default)
+        {
+            return Task.FromResult(_despesas.FirstOrDefault());
+        }
+
+        public Task AddAsync(Despesa despesa, CancellationToken ct = default)
+        {
+            _despesas.Add(despesa);
+            return Task.CompletedTask;
         }
     }
 }

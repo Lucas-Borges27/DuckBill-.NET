@@ -23,7 +23,8 @@ public sealed class ApiKeyMiddleware
             return;
         }
 
-        var expectedApiKey = _configuration["Authentication:ApiKey"];
+        var expectedApiKey = Environment.GetEnvironmentVariable("API_KEY")
+            ?? _configuration["Authentication:ApiKey"];
         if (string.IsNullOrWhiteSpace(expectedApiKey))
         {
             var logger = context.RequestServices.GetRequiredService<ILogger<ApiKeyMiddleware>>();
